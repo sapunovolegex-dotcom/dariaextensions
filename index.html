@@ -1,0 +1,1078 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Daria Extensions</title>
+<meta name="description" content="Przedłużanie włosów metodą minikapsułek i biotaśm. Niewidoczne łączenia, włosy premium i dziewicze, bez bioproteiny.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Playfair+Display:ital,wght@0,400..600;1,400..600&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: arched hero "mirror" with live hair strands, then a quiet editorial column — methods compared side by side, hair, process, shades, message builder. */
+:root{
+  --bg:#EEEBEA; --surface:#F8F6F5; --ink:#1F1A1B; --muted:#675E60; --line:#D8D1CF;
+  --rose:#6A2F3B; --rose-ink:#FFF8F6;
+  --gold:#B8935F; --gold-2:#E4CDA6; --gold-3:#86643E;
+  --display:"Bodoni Moda", "Playfair Display", "Didot", "Bodoni 72", Georgia, serif; /* Playfair supplies the Cyrillic glyphs Bodoni lacks */
+  --body:"Manrope", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --s-1:.8125rem; --s0:1rem; --s1:1.25rem; --s2:1.75rem; --s3:2.5rem; --s4:clamp(2.6rem,6.4vw,5.4rem);
+  --gutter-l:max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r:max(16px, env(safe-area-inset-right, 0px));
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#151213; --surface:#1E1A1B; --ink:#F0EAE6; --muted:#A99E9F; --line:#352D2F;
+    --rose:#D9979F; --rose-ink:#1B1213;
+    --gold:#D6B583; --gold-2:#F0DDBA; --gold-3:#9D7B51;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#151213; --surface:#1E1A1B; --ink:#F0EAE6; --muted:#A99E9F; --line:#352D2F;
+  --rose:#D9979F; --rose-ink:#1B1213;
+  --gold:#D6B583; --gold-2:#F0DDBA; --gold-3:#9D7B51;
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:var(--s0);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.05;text-wrap:balance;margin:0}
+p{margin:0}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+
+.wrap{max-width:1180px;margin:0 auto;padding-left:var(--gutter-l);padding-right:var(--gutter-r)}
+.label{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.logo{font-family:var(--display);font-size:1.35rem;text-decoration:none;letter-spacing:.01em}
+.logo i{color:var(--gold-3)}
+.nav{display:flex;gap:26px;align-items:center;font-size:.9rem}
+.nav a{text-decoration:none;color:var(--muted)}
+.nav a:hover{color:var(--ink)}
+
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:999px;font-weight:600;font-size:.92rem;text-decoration:none;border:1px solid transparent;cursor:pointer;font-family:var(--body);transition:transform .2s ease, background .2s ease}
+.btn-main{background:var(--rose);color:var(--rose-ink)}
+.btn-main:hover{transform:translateY(-1px)}
+.btn-ghost{border-color:var(--line);color:var(--ink);background:transparent}
+.btn-ghost:hover{border-color:var(--gold)}
+.tools{display:flex;align-items:center;gap:12px;flex:none}
+.nav-cta{padding:9px 16px;white-space:nowrap}
+.nav-cta .short{display:none}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px}
+.lang button{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;border:0;background:transparent;color:var(--muted);padding:6px 9px;border-radius:999px;cursor:pointer;transition:background .2s,color .2s}
+.lang button:hover{color:var(--ink)}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+@media (max-width:1040px){.nav{gap:18px}}
+@media (max-width:960px){.nav{display:none}}
+.top .logo{white-space:nowrap}
+@media (max-width:520px){.nav-cta .long{display:none}.nav-cta .short{display:inline}.top .logo{font-size:1.15rem}.tools{gap:8px}}
+@media (max-width:440px){.nav-cta{display:none}}
+
+/* hero */
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(28px,5vw,72px);align-items:center;padding-block:clamp(40px,7vw,88px)}
+.hero h1{font-size:var(--s4);letter-spacing:-.01em}
+.hero h1 em{color:var(--gold-3);font-style:italic}
+.hero .lede{margin-top:26px;max-width:34rem;font-size:1.08rem;color:var(--muted)}
+.hero .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.hero .facts{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:40px;padding-top:22px;border-top:1px solid var(--line)}
+.hero .facts div{display:flex;flex-direction:column;gap:2px}
+.hero .facts b{font-family:var(--display);font-size:1.6rem;font-weight:500}
+.mirror{position:relative;aspect-ratio:4/5.4;max-width:100%;width:100%;border-radius:999px 999px 18px 18px;overflow:hidden;background:linear-gradient(180deg,var(--surface),var(--bg));border:1px solid var(--line)}
+.mirror canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.mirror .tag{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:8px 16px;white-space:nowrap;font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;color:var(--muted)}
+@media (max-width:860px){
+  .hero .wrap{grid-template-columns:1fr}
+  .mirror{aspect-ratio:auto;height:340px;border-radius:200px 200px 18px 18px}
+}
+
+/* sections */
+section.block{padding-block:clamp(56px,8vw,110px)}
+.head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:24px 48px;align-items:end;margin-bottom:clamp(32px,5vw,56px)}
+.head h2{font-size:var(--s3)}
+.head p{color:var(--muted);max-width:36rem}
+@media (max-width:760px){.head{grid-template-columns:1fr}}
+.rule{border:0;border-top:1px solid var(--line);margin:0}
+
+/* manifesto */
+.manifesto{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+.manifesto article{padding:8px 28px 8px 0;display:flex;flex-direction:column;gap:12px}
+.manifesto article + article{padding-left:28px;border-left:1px solid var(--line)}
+.manifesto h3{font-size:var(--s2)}
+.manifesto p{color:var(--muted)}
+@media (max-width:820px){
+  .manifesto{grid-template-columns:1fr;gap:28px}
+  .manifesto article,.manifesto article + article{padding:0;border-left:0}
+  .manifesto article + article{padding-top:28px;border-top:1px solid var(--line)}
+}
+.quote{font-family:var(--display);font-style:italic;font-size:clamp(1.7rem,3.6vw,2.8rem);line-height:1.2;max-width:22ch;margin:0 0 clamp(36px,5vw,60px)}
+.quote span{color:var(--gold-3)}
+
+/* methods */
+.methods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.method{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:clamp(22px,3vw,36px);display:flex;flex-direction:column;gap:18px;min-width:0}
+.method h3{font-size:var(--s2)}
+.method .size{display:flex;align-items:center;gap:14px}
+.method svg{flex:none}
+.method dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px 18px;margin:0;font-size:.95rem}
+.method dt{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.method dd{margin:0}
+.note{margin-top:16px;font-size:var(--s-1);color:var(--muted)}
+@media (max-width:760px){.methods{grid-template-columns:1fr}.method dl{grid-template-columns:1fr;gap:2px}.method dd{margin-bottom:10px}}
+
+/* hair */
+.hair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:start}
+.compare{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--surface)}
+.compare .row{display:grid;grid-template-columns:1.1fr 1fr 1fr;border-top:1px solid var(--line)}
+.compare .row:first-child{border-top:0}
+.compare .row > *{padding:14px 16px;font-size:.92rem;min-width:0}
+.compare .row > * + *{border-left:1px solid var(--line)}
+.compare .h{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.compare .yes{color:var(--ink)}
+.compare .no{color:var(--muted)}
+.compare .us{background:color-mix(in srgb,var(--gold-2) 22%,transparent)}
+.hair .copy{display:flex;flex-direction:column;gap:18px}
+.hair .copy p{color:var(--muted)}
+.hair .copy strong{color:var(--ink);font-weight:600}
+@media (max-width:860px){.hair{grid-template-columns:1fr}}
+.scroll-x{overflow-x:auto}
+.compare-inner{min-width:420px}
+
+/* process */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;counter-reset:s}
+.steps li{counter-increment:s;display:flex;flex-direction:column;gap:10px;padding-top:18px;border-top:2px solid var(--ink)}
+.steps li::before{content:counter(s,decimal-leading-zero);font-family:var(--mono);font-size:.78rem;color:var(--gold-3);letter-spacing:.1em}
+.steps h3{font-size:1.45rem}
+.steps p{color:var(--muted);font-size:.95rem}
+@media (max-width:900px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}}
+
+/* shades */
+.shades{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.shade{display:flex;flex-direction:column;gap:10px;min-width:0}
+.shade .lock{height:190px;border-radius:999px 999px 10px 10px;border:1px solid var(--line);position:relative;overflow:hidden}
+.shade .lock::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 3px,rgba(255,255,255,.12) 3px 4px,transparent 4px 7px,rgba(0,0,0,.08) 7px 8px)}
+.shade span{font-size:.88rem}
+.shade small{font-family:var(--mono);font-size:.7rem;color:var(--muted);letter-spacing:.06em}
+@media (max-width:820px){.shades{grid-template-columns:repeat(3,minmax(0,1fr))}.shade .lock{height:130px}}
+
+/* portfolio */
+.portfolio{padding-top:clamp(24px,4vw,48px)}
+.works{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(8px,1.4vw,16px);grid-auto-flow:dense}
+.work{position:relative;display:block;padding:0;border:0;margin:0;background:var(--surface);border-radius:14px;overflow:hidden;cursor:zoom-in;aspect-ratio:3/4;max-width:100%;color:#fff;text-align:left;font:inherit}
+.work.feature{grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
+.work img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.work::after{content:"";position:absolute;inset:auto 0 0;height:45%;background:linear-gradient(to top,rgba(18,12,10,.72),rgba(18,12,10,0));pointer-events:none}
+.work .cap{position:absolute;left:14px;right:14px;bottom:12px;z-index:1;display:flex;flex-direction:column;gap:2px;transition:transform .5s ease}
+.work .cap b{font-family:var(--display);font-weight:500;font-size:clamp(1rem,1.8vw,1.35rem);line-height:1.1}
+.work.feature .cap b{font-size:clamp(1.3rem,3vw,2.2rem)}
+.work .cap small{font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+.work:hover img{transform:scale(1.05)}
+.work:hover .cap{transform:translateY(-4px)}
+.ig-more{display:flex;justify-content:center;margin-top:28px}
+@media (max-width:640px){
+  .works{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .work.feature{grid-row:auto;aspect-ratio:3/4}
+  .work .cap small{display:none}
+}
+/* comb reveal: strands of the photo grow in as it scrolls into view */
+@property --comb{syntax:"<percentage>";inherits:false;initial-value:100%}
+@keyframes comb{
+  from{--comb:8%;transform:translateY(28px) scale(1.08)}
+  to{--comb:100%;transform:none}
+}
+@supports (animation-timeline: view()){
+  @media (prefers-reduced-motion: no-preference){
+    .work img{
+      -webkit-mask-image:linear-gradient(90deg,#000 var(--comb),transparent var(--comb));
+      mask-image:linear-gradient(90deg,#000 var(--comb),transparent var(--comb));
+      -webkit-mask-size:5.5% 100%;mask-size:5.5% 100%;
+      animation:comb linear both;animation-timeline:view();animation-range:entry 0% entry 80%;
+    }
+    .work:nth-child(3n+2) img{animation-range:entry 8% entry 90%}
+    .work:nth-child(3n) img{animation-range:entry 16% entry 100%}
+    .work:hover img{transform:scale(1.05)}
+  }
+}
+/* lightbox */
+.lightbox{border:0;padding:0;background:transparent;max-width:min(92vw,720px);max-height:92vh;overflow:visible;color:#fff}
+.lightbox::backdrop{background:rgba(14,10,10,.86);backdrop-filter:blur(6px)}
+.lightbox figure{margin:0;display:flex;flex-direction:column;gap:12px}
+.lightbox img{display:block;max-height:80vh;width:auto;max-width:100%;margin:0 auto;border-radius:12px}
+.lightbox[open] img{animation:lbIn .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes lbIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+.lightbox figcaption{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;justify-content:center}
+.lightbox figcaption b{font-family:var(--display);font-weight:500;font-size:1.3rem}
+.lightbox figcaption span{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;opacity:.8}
+.lb-btn{position:fixed;width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(20,14,14,.5);color:#fff;font-size:1.2rem;cursor:pointer;display:grid;place-items:center}
+.lb-btn:hover{background:rgba(255,255,255,.15)}
+.lb-close{top:calc(16px + env(safe-area-inset-top,0px));right:calc(16px + env(safe-area-inset-right,0px))}
+.lb-prev{left:calc(16px + env(safe-area-inset-left,0px));top:50%;transform:translateY(-50%)}
+.lb-next{right:calc(16px + env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%)}
+@media (max-width:640px){.lb-prev,.lb-next{top:auto;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:none}}
+
+/* price calculator */
+.calc{border-top:1px solid var(--line);padding-top:16px;display:flex;flex-direction:column;gap:10px}
+.calc output{font-family:var(--mono);color:var(--ink)}
+.calc input[type=range]{width:100%;accent-color:var(--rose)}
+.calc-out{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.calc-out span{font-family:var(--display);font-size:2rem;line-height:1;font-variant-numeric:tabular-nums}
+.calc-out small{color:var(--muted);font-size:.85rem}
+
+.mirror{touch-action:pan-y;cursor:grab}
+
+/* skup */
+.buy{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,3vw,40px)}
+.price{background:var(--ink);color:var(--bg);border-radius:18px;padding:clamp(22px,3vw,32px);display:flex;flex-direction:column;gap:12px}
+.price .label{color:color-mix(in srgb,var(--bg) 65%,transparent)}
+.price .big{font-family:var(--display);font-size:clamp(2.4rem,5vw,3.4rem);line-height:1}
+.price .big small{font-family:var(--mono);font-size:.85rem;letter-spacing:.06em}
+.price .muted{color:color-mix(in srgb,var(--bg) 72%,transparent);font-size:.92rem}
+.ticks{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+.ticks li{display:grid;grid-template-columns:20px minmax(0,1fr);gap:8px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.ticks li::before{content:"✓";font-family:var(--mono);color:var(--gold-3)}
+.ticks.no li::before{content:"×";color:var(--rose)}
+.ticks.no li{color:var(--muted)}
+.buy-cta{margin-top:clamp(24px,4vw,40px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
+.buy-cta > p{max-width:46ch;color:var(--muted)}
+.buy-cta .actions{display:flex;flex-wrap:wrap;gap:10px}
+.buy-cta .status{flex-basis:100%}
+@media (max-width:900px){.buy{grid-template-columns:1fr 1fr}.price{grid-column:1/-1}}
+@media (max-width:560px){.buy{grid-template-columns:1fr}}
+
+/* faq */
+.faq{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,5vw,64px)}
+.faq details{border-top:1px solid var(--line);padding-block:18px}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;font-weight:600;font-size:1.02rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--mono);color:var(--gold-3);font-weight:400;transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{margin-top:12px;color:var(--muted);max-width:60ch}
+@media (max-width:820px){.faq{grid-template-columns:1fr}}
+
+/* contact */
+.contact{background:var(--surface);border-block:1px solid var(--line)}
+.builder{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px)}
+form{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field.full{grid-column:1/-1}
+.field label,.field legend{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:0}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+input[type=text],select,textarea{width:100%;font:inherit;font-size:.95rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:11px 12px}
+textarea{min-height:84px;resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.chips label{position:relative}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips span{display:inline-block;padding:8px 14px;border:1px solid var(--line);border-radius:999px;font-size:.88rem;cursor:pointer;font-family:var(--body);letter-spacing:0;text-transform:none;color:var(--ink)}
+.chips input:checked + span{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chips input:focus-visible + span{outline:2px solid var(--gold);outline-offset:2px}
+.preview{display:flex;flex-direction:column;gap:14px}
+.bubble{background:var(--bg);border:1px solid var(--line);border-radius:18px 18px 18px 4px;padding:18px 20px;white-space:pre-wrap;font-size:.95rem;min-height:200px;user-select:text}
+.preview .actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.status{font-size:.85rem;color:var(--muted);min-height:1.3em}
+@media (max-width:860px){.builder{grid-template-columns:1fr}}
+@media (max-width:480px){form{grid-template-columns:1fr}}
+
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;padding-block:36px;color:var(--muted);font-size:.88rem}
+footer .logo{color:var(--ink)}
+</style>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Daria Extensions · Poznań">
+<meta property="og:description" content="Przedłużanie i zagęszczanie włosów minikapsułkami i biotaśmami. Niewidoczne łączenia, włosy premium i dziewicze.">
+<meta property="og:image" content="https://sapunovolegex-dotcom.github.io/dariaextensions/img/p06.jpg">
+<meta property="og:url" content="https://sapunovolegex-dotcom.github.io/dariaextensions/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%236A2F3B'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23F0DDBA'%3ED%3C/text%3E%3C/svg%3E">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#start">Daria <i>Extensions</i></a>
+    <nav class="nav" aria-label="Menu">
+      <a href="#portfolio" data-t="nav.pf">Portfolio</a>
+      <a href="#metody" data-t="nav.me">Metody</a>
+      <a href="#wlosy" data-t="nav.hair">Włosy</a>
+      <a href="#wizyta" data-t="nav.visit">Wizyta</a>
+      <a href="#skup" data-t="nav.buy">Skup włosów</a>
+      <a href="#faq" data-t="nav.faq">Pytania</a>
+    </nav>
+    <div class="tools">
+      <div class="lang" role="group" aria-label="Język" data-ta="aria-label:lang.aria">
+        <button type="button" data-lang="pl" lang="pl" aria-pressed="true">PL</button>
+        <button type="button" data-lang="uk" lang="uk" aria-pressed="false">UA</button>
+        <button type="button" data-lang="en" lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a class="btn btn-main nav-cta" href="#kontakt"><span class="long" data-t="cta.long">Umów konsultację</span><span class="short" data-t="cta.short">Umów się</span></a>
+    </div>
+  </div>
+</header>
+
+<main id="start">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="label" data-t="hero.eye">Poznań · Przedłużanie i zagęszczanie włosów</p>
+        <h1 style="margin-top:18px" data-t="hero.h1">Niewidoczne łączenia. <em>Naturalny</em> efekt.</h1>
+        <p class="lede" data-t="hero.lede">Nie „doczepiam” włosów. Przedłużam je albo delikatnie zagęszczam minikapsułkami i biotaśmami, tak żeby nikt nie zgadł, gdzie kończą się Twoje włosy, a zaczynają nowe. Pracuję wyłącznie na włosach premium i dziewiczych.</p>
+        <div class="cta">
+          <a class="btn btn-main" href="#kontakt" data-t="hero.cta1">Zapytaj o termin</a>
+          <a class="btn btn-ghost" href="https://www.instagram.com/dariaextensions/" target="_blank" rel="noopener" data-t="hero.cta2">Zobacz metamorfozy ↗</a>
+        </div>
+        <div class="facts">
+          <div><b>170+</b><span class="label" data-t="fact1">prac na Instagramie</span></div>
+          <div><b data-t="fact2b">od 50</b><span class="label" data-t="fact2">kapsułek na zagęszczenie</span></div>
+          <div><b>0 %</b><span class="label" data-t="fact3">bioproteiny</span></div>
+        </div>
+      </div>
+      <div class="mirror" id="mirror" aria-hidden="true">
+        <canvas id="strands"></canvas>
+        <div class="tag" data-t="tag">Dotknij i przeczesz ✦</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block portfolio" id="portfolio">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <p class="label" data-t="pf.label">Portfolio</p>
+          <h2 style="margin-top:10px" data-t="pf.h2">Metamorfozy z mojego studia</h2>
+        </div>
+        <p data-t="pf.p">Prawdziwe klientki, prawdziwe światło, bez filtrów. Kliknij zdjęcie, żeby je powiększyć. Więcej prac i filmy „przed i po” znajdziesz na Instagramie.</p>
+      </div>
+      <div class="works">
+        <button class="work feature" type="button"><img src="img/p06.jpg" alt="Brązowe włosy z karmelowymi końcówkami po delikatnym zagęszczeniu" data-ta="alt:w0a" width="900" height="1200" decoding="async"><span class="cap"><b data-t="w0t">Subtelna metamorfoza</b><small data-t="w0s">Zagęszczenie · karmelowe końce</small></span></button>
+        <button class="work" type="button"><img src="img/p02.jpg" alt="Długie fale w odcieniu miodowego blondu" data-ta="alt:w1a" width="900" height="1200" loading="lazy" decoding="async"><span class="cap"><b>Angel</b><small data-t="w1s">Miodowy blond, fale</small></span></button>
+        <button class="work" type="button"><img src="img/p03.jpg" alt="Czarne, proste włosy zagęszczone kapsułkami" data-ta="alt:w2a" width="900" height="1200" loading="lazy" decoding="async"><span class="cap"><b data-t="w2t">50 kapsułek</b><small data-t="w2s">Delikatne zagęszczenie</small></span></button>
+        <button class="work" type="button"><img src="img/p08.jpg" alt="Długie platynowe włosy" data-ta="alt:w3a" width="900" height="1200" loading="lazy" decoding="async"><span class="cap"><b data-t="w3t">Platyna</b><small data-t="w3s">Do 50 g włosów</small></span></button>
+        <button class="work" type="button"><img src="img/p04.jpg" alt="Kręcone włosy w popielatym blondzie z większą objętością" data-ta="alt:w4a" width="900" height="1200" loading="lazy" decoding="async"><span class="cap"><b data-t="w4t">Objętość w lokach</b><small data-t="w4s">Subtelne zagęszczenie</small></span></button>
+        <button class="work" type="button"><img src="img/p05.jpg" alt="Proste kasztanowe włosy z gęstymi końcami" data-ta="alt:w5a" width="900" height="1200" loading="lazy" decoding="async"><span class="cap"><b data-t="w5t">Naturalna długość</b><small data-t="w5s">Gęste końce</small></span></button>
+        <button class="work" type="button"><img src="img/p10.jpg" alt="Popielaty blond z ciemniejszą nasadą" data-ta="alt:w6a" width="900" height="1200" loading="lazy" decoding="async"><span class="cap"><b data-t="w6t">Moja dusza</b><small data-t="w6s">Popielaty blond</small></span></button>
+        <button class="work" type="button"><img src="img/p11.jpg" alt="Jasne ombre na prostych włosach" data-ta="alt:w7a" width="900" height="1200" loading="lazy" decoding="async"><span class="cap"><b data-t="w7t">Jasne ombre</b><small data-t="w7s">Płynne przejście koloru</small></span></button>
+        <button class="work" type="button"><img src="img/p07.jpg" alt="Miedziane włosy do łopatek" data-ta="alt:w8a" width="900" height="1200" loading="lazy" decoding="async"><span class="cap"><b data-t="w8t">Miedź</b><small data-t="w8s">Ciepły, rudy odcień</small></span></button>
+      </div>
+      <div class="ig-more">
+        <a class="btn btn-ghost" href="https://www.instagram.com/dariaextensions/" target="_blank" rel="noopener" data-t="pf.more">Zobacz 170+ prac na Instagramie ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <dialog class="lightbox" id="lb" aria-label="Powiększone zdjęcie" data-ta="aria-label:lb.aria">
+    <figure>
+      <img id="lb-img" src="img/p06.jpg" alt="">
+      <figcaption><b id="lb-t"></b><span id="lb-s"></span><span class="count" id="lb-n"></span></figcaption>
+    </figure>
+    <button class="lb-btn lb-close" type="button" id="lb-close" aria-label="Zamknij" data-ta="aria-label:lb.close">×</button>
+    <button class="lb-btn lb-prev" type="button" id="lb-prev" aria-label="Poprzednie zdjęcie" data-ta="aria-label:lb.prev">←</button>
+    <button class="lb-btn lb-next" type="button" id="lb-next" aria-label="Następne zdjęcie" data-ta="aria-label:lb.next">→</button>
+  </dialog>
+
+  <hr class="rule">
+
+  <section class="block">
+    <div class="wrap">
+      <p class="quote" data-t="quote">Czasem nie chodzi o to, by włosy były dłuższe. Chodzi o <span>gęste końce i absolutną naturalność.</span></p>
+      <div class="manifesto">
+        <article>
+          <p class="label" data-t="m1l">Łączenia</p>
+          <h3 data-t="m1h">Płasko, cienko, blisko skóry</h3>
+          <p data-t="m1p">Kapsułki i taśmy dobieram do grubości Twoich pasm. Łączenia nie odstają, nie szeleszczą i nie wychodzą spod włosów przy wietrze ani przy kucyku.</p>
+        </article>
+        <article>
+          <p class="label" data-t="m2l">Zagęszczenie</p>
+          <h3 data-t="m2h">Objętość w Twojej długości</h3>
+          <p data-t="m2p">Często wystarczy 50 kapsułek, żeby fryzura nabrała życia. Dodaję gęstości tam, gdzie jej brakuje, bez obciążania Twoich włosów i bez zmiany długości.</p>
+        </article>
+        <article>
+          <p class="label" data-t="m3l">Materiał</p>
+          <h3 data-t="m3h">Tylko prawdziwe włosy</h3>
+          <p data-t="m3p">Premium i dziewicze, z zachowaną łuską. Można je farbować, kręcić i prostować tak samo jak własne. Odcień składam z kilku tonów, żeby powtórzyć Twoje refleksy.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="metody" style="padding-top:0">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <p class="label" data-t="me.label">Metody</p>
+          <h2 style="margin-top:10px" data-t="me.h2">Dwie techniki, jedna zasada</h2>
+        </div>
+        <p data-t="me.p">Metodę wybieramy razem na konsultacji. Decyduje grubość i kondycja Twoich włosów, fryzury, które nosisz na co dzień, oraz to, jak często możesz przychodzić na korektę.</p>
+      </div>
+      <div class="methods">
+        <article class="method">
+          <div class="size">
+            <svg width="70" height="34" viewBox="0 0 70 34" aria-hidden="true">
+              <path d="M2 17 C20 17 30 17 34 17" stroke="var(--gold)" stroke-width="2" fill="none"/>
+              <path d="M2 13 C20 14 30 15 34 16" stroke="var(--gold-2)" stroke-width="1.4" fill="none"/>
+              <path d="M2 21 C20 20 30 19 34 18" stroke="var(--gold-3)" stroke-width="1.4" fill="none"/>
+              <ellipse cx="40" cy="17" rx="7" ry="4.5" fill="var(--gold-2)" stroke="var(--gold-3)" stroke-width="1"/>
+              <path d="M47 17 C55 17 62 17 68 17" stroke="var(--muted)" stroke-width="1" fill="none" stroke-dasharray="2 3"/>
+            </svg>
+            <span class="label" data-t="mk.size">kapsułka ≈ ziarenko ryżu</span>
+          </div>
+          <h3 data-t="mk.h3">Minikapsułki</h3>
+          <p data-t="mk.p">Małe keratynowe łączenia zakładane pasmo po paśmie. Dają największą swobodę: włosy możesz upiąć wysoko i rozczesać na każdą stronę.</p>
+          <dl>
+            <dt data-t="dt.who">Dla kogo</dt><dd data-t="mk.who">Przedłużanie albo delikatne zagęszczenie, także na cienkich włosach</dd>
+            <dt data-t="dt.styles">Fryzury</dt><dd data-t="mk.styles">Wysoki kucyk, kok, upięcia</dd>
+            <dt data-t="dt.maint">Korekta</dt><dd data-t="mk.maint">Zwykle co 2,5–3,5 miesiąca</dd>
+            <dt data-t="dt.fit">Zakładanie</dt><dd data-t="mk.fit">Kilka godzin, zależnie od liczby pasm</dd>
+            <dt data-t="dt.price">Cena</dt><dd data-t="mk.price"><b>6 zł za kapsułkę</b>, w cenie włosy i założenie (all-inclusive)</dd>
+          </dl>
+          <div class="calc">
+            <label for="caps" class="label"><span data-t="calc.pre">Policz:</span> <output id="caps-n" for="caps">50</output> <span data-t="calc.post">kapsułek</span></label>
+            <input type="range" id="caps" min="25" max="250" step="5" value="50">
+            <p class="calc-out"><span id="caps-p">300 zł</span><small id="caps-h">delikatne zagęszczenie</small></p>
+          </div>
+        </article>
+        <article class="method">
+          <div class="size">
+            <svg width="70" height="34" viewBox="0 0 70 34" aria-hidden="true">
+              <rect x="22" y="9" width="40" height="7" rx="2" fill="var(--gold-2)" stroke="var(--gold-3)" stroke-width="1"/>
+              <path d="M24 16 L24 33 M30 16 L30 33 M36 16 L36 33 M42 16 L42 33 M48 16 L48 33 M54 16 L54 33 M60 16 L60 33" stroke="var(--gold)" stroke-width="1.2"/>
+              <path d="M4 12.5 L18 12.5" stroke="var(--muted)" stroke-width="1" stroke-dasharray="2 3"/>
+            </svg>
+            <span class="label" data-t="bt.size">taśma płaska przy skórze</span>
+          </div>
+          <h3 data-t="bt.h3">Biotaśmy</h3>
+          <p data-t="bt.p">Cienkie, elastyczne taśmy, które przylegają do głowy jak druga skóra. Szybkie zakładanie i bardzo równy, gładki efekt.</p>
+          <dl>
+            <dt data-t="dt.who">Dla kogo</dt><dd data-t="bt.who">Gdy zależy Ci na gęstości i gładkiej tafli</dd>
+            <dt data-t="dt.styles">Fryzury</dt><dd data-t="bt.styles">Rozpuszczone, półupięcia, niski kucyk</dd>
+            <dt data-t="dt.maint">Korekta</dt><dd data-t="bt.maint">Zwykle co 6–8 tygodni</dd>
+            <dt data-t="dt.fit">Zakładanie</dt><dd data-t="bt.fit">Krócej niż kapsułki, bez użycia ciepła</dd>
+          </dl>
+        </article>
+      </div>
+      <p class="note" data-t="me.note">Czasy podane orientacyjnie. Dokładny plan ustalamy po obejrzeniu Twoich włosów.</p>
+    </div>
+  </section>
+
+  <section class="block" id="wlosy" style="padding-top:0">
+    <div class="wrap hair">
+      <div class="copy">
+        <p class="label" data-t="h.label">Włosy</p>
+        <h2 style="font-size:var(--s3)" data-t="h.h2">Premium i dziewicze. Żadnej bioproteiny.</h2>
+        <p data-t="h.p1"><strong>Włosy dziewicze</strong> nigdy nie były farbowane ani poddane chemicznej obróbce. Łuska jest ułożona w jednym kierunku, więc włosy się nie plączą i długo zachowują połysk.</p>
+        <p data-t="h.p2"><strong>Bioproteina</strong> to włókno sztuczne, które tylko udaje włosy. Matowieje, plącze się, nie znosi wysokiej temperatury i nie da się go przefarbować. Dlatego z nim nie pracuję.</p>
+        <p data-t="h.p3">Dobre włosy można po zdjęciu założyć ponownie przy korekcie. Płacisz za nie raz i nosisz długo.</p>
+      </div>
+      <div class="compare scroll-x" role="region" aria-label="Porównanie rodzajów włosów" data-ta="aria-label:cmp.aria" tabindex="0">
+        <div class="compare-inner">
+          <div class="row"><span class="h"></span><span class="h us" data-t="cmp.h1">Dziewicze / premium</span><span class="h" data-t="cmp.h2">Bioproteina</span></div>
+          <div class="row"><span data-t="cmp.r1">Farbowanie</span><span class="yes us" data-t="yes">Tak</span><span class="no" data-t="no">Nie</span></div>
+          <div class="row"><span data-t="cmp.r2">Lokówka, prostownica</span><span class="yes us" data-t="yes">Tak</span><span class="no" data-t="cmp.lim">Ograniczone</span></div>
+          <div class="row"><span data-t="cmp.r3">Wygląd w świetle</span><span class="yes us" data-t="cmp.shine">Naturalny połysk</span><span class="no" data-t="cmp.gloss">Sztuczny błysk</span></div>
+          <div class="row"><span data-t="cmp.r4">Plątanie</span><span class="yes us" data-t="cmp.min">Minimalne</span><span class="no" data-t="cmp.mats">Szybko się filcuje</span></div>
+          <div class="row"><span data-t="cmp.r5">Ponowne założenie</span><span class="yes us" data-t="cmp.reuse">Tak, przy korekcie</span><span class="no" data-t="cmp.usually">Zwykle nie</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section class="block" id="wizyta">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <p class="label" data-t="v.label">Wizyta</p>
+          <h2 style="margin-top:10px" data-t="v.h2">Jak to wygląda krok po kroku</h2>
+        </div>
+        <p data-t="v.p">Od pierwszej wiadomości do pierwszej korekty. Na każdym etapie wiesz, co się dzieje i ile to potrwa.</p>
+      </div>
+      <ol class="steps">
+        <li><h3 data-t="s1h">Konsultacja</h3><p data-t="s1p">Oglądam Twoje włosy, rozmawiamy o efekcie i wybieramy metodę. Możesz wysłać zdjęcia w świetle dziennym.</p></li>
+        <li><h3 data-t="s2h">Dobór włosów</h3><p data-t="s2p">Dopasowuję odcień do Twojej końcówki i nasady, ustalamy długość oraz liczbę pasm.</p></li>
+        <li><h3 data-t="s3h">Zakładanie</h3><p data-t="s3p">Łączę włosy, a na koniec ścinam i cieniuję całość, żeby nowe pasma wtopiły się w Twoje.</p></li>
+        <li><h3 data-t="s4h">Pielęgnacja i korekta</h3><p data-t="s4p">Dostajesz instrukcję pielęgnacji i termin korekty, na której przesuwam łączenia bliżej skóry.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:0">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <p class="label" data-t="k.label">Kolor</p>
+          <h2 style="margin-top:10px" data-t="k.h2">Od platyny po czerń</h2>
+        </div>
+        <p data-t="k.p">To tylko punkt wyjścia. Ostateczny kolor składam z kilku tonów, dopasowując go do Twoich włosów pasmo przy paśmie.</p>
+      </div>
+      <div class="shades">
+        <div class="shade"><div class="lock" style="background:linear-gradient(180deg,#d8cdbb,#f1ebdf 55%,#e7dccb)"></div><span data-t="sh1">Platyna</span><small>10 / 01</small></div>
+        <div class="shade"><div class="lock" style="background:linear-gradient(180deg,#a99577,#d7c4a1 55%,#e8d7b6)"></div><span data-t="sh2">Beżowy blond</span><small>9 / 3</small></div>
+        <div class="shade"><div class="lock" style="background:linear-gradient(180deg,#8d775a,#bfa27b 55%,#cdb28b)"></div><span data-t="sh3">Ciemny blond</span><small>7 / 0</small></div>
+        <div class="shade"><div class="lock" style="background:linear-gradient(180deg,#6b4a30,#a0703f 55%,#b8834c)"></div><span data-t="sh4">Karmel</span><small>6 / 34</small></div>
+        <div class="shade"><div class="lock" style="background:linear-gradient(180deg,#3a2a21,#5b4031 55%,#6b4b38)"></div><span data-t="sh5">Czekolada</span><small>4 / 0</small></div>
+        <div class="shade"><div class="lock" style="background:linear-gradient(180deg,#141011,#252021 55%,#2e292a)"></div><span data-t="sh6">Naturalna czerń</span><small>1 / 0</small></div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section class="block" id="skup">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <p class="label" data-t="b.label">Skup włosów</p>
+          <h2 style="margin-top:10px" data-t="b.h2">Kupię naturalne włosy od 45 cm</h2>
+        </div>
+        <p data-t="b.p">Marzysz o stylowym bobie albo zmianie wizerunku? Zetnij włosy w moim studio, a dostaniesz za nie pieniądze i dopracowaną fryzurę za darmo.</p>
+      </div>
+      <div class="buy">
+        <div class="price">
+          <p class="label" data-t="dt.price">Cena</p>
+          <p class="big" data-t="b.big">od 5 zł <small>/ gram</small></p>
+          <p class="muted" data-t="b.m1">Ostateczna kwota zależy od wagi, długości i kondycji kity. Wypłata od razu po ścięciu i zważeniu: BLIK, gotówka lub przelew.</p>
+          <p class="muted" data-t="b.m2">Najwyżej wyceniam włosy dziecięce i naturalne jasne odcienie.</p>
+        </div>
+        <div>
+          <p class="label" data-t="b.acc">Przyjmuję</p>
+          <ul class="ticks">
+            <li data-t="acc1">Długość od 45 cm, mierzona w kucyku</li>
+            <li data-t="acc2">Włosy naturalne, niefarbowane: bez szamponetek, henny, botoksu i keratyny</li>
+            <li data-t="acc3">Gęste, zadbane końce bez mocnego przerzedzenia</li>
+          </ul>
+        </div>
+        <div>
+          <p class="label" data-t="b.rej">Nie przyjmuję</p>
+          <ul class="ticks no">
+            <li data-t="rej1">Włosów farbowanych</li>
+            <li data-t="rej2">Wyczesek</li>
+            <li data-t="rej3">Włosów z pomieszaną (odwróconą) łuską</li>
+            <li data-t="rej4">Pasm sztucznych i bioproteinowych</li>
+          </ul>
+        </div>
+      </div>
+      <div class="buy-cta">
+        <p data-t="b.cta">Po wstępną wycenę wyślij w Direct zdjęcie włosów od tyłu w świetle dziennym i ich przybliżoną długość.</p>
+        <div class="actions">
+          <button class="btn btn-main" type="button" id="copy-skup" data-t="b.copy">Kopiuj wiadomość o wycenę</button>
+          <a class="btn btn-ghost" href="https://ig.me/m/dariaextensions" target="_blank" rel="noopener" data-t="ig.open">Otwórz Instagram ↗</a>
+        </div>
+        <p class="status" id="status-skup"></p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section class="block" id="faq">
+    <div class="wrap faq">
+      <div>
+        <p class="label" data-t="f.label">Pytania</p>
+        <h2 style="font-size:var(--s3);margin-top:10px" data-t="f.h2">Zanim napiszesz</h2>
+        <p style="color:var(--muted);margin-top:16px;max-width:30ch" data-t="f.p">Nie ma tu Twojego pytania? Napisz na Instagramie, odpowiem osobiście.</p>
+      </div>
+      <div>
+        <details open><summary data-t="q1">Czy łączenia będą widoczne?</summary><p data-t="a1">Nie powinny. Dobieram wielkość łączeń do grubości Twoich pasm i rozmieszczam je tak, żeby schowały się pod naturalnymi włosami również przy upięciach.</p></details>
+        <details><summary data-t="q2">Czy przedłużanie niszczy włosy?</summary><p data-t="a2">Przy dobrze dobranej metodzie, regularnych korektach i właściwej pielęgnacji Twoje włosy są bezpieczne. Problemy biorą się zwykle z za ciężkich pasm i zbyt rzadkich korekt.</p></details>
+        <details><summary data-t="q3">Ile trwa przedłużanie?</summary><p data-t="a3">Biotaśmy zakłada się szybciej, minikapsułki wymagają kilku godzin. Czas zależy od liczby pasm, a dokładnie podam go po konsultacji.</p></details>
+        <details><summary data-t="q4">Czy mogę farbować i prostować doczepione włosy?</summary><p data-t="a4">Tak. Włosy premium i dziewicze znoszą farbowanie, lokówkę i prostownicę. Używaj termoochrony i omijaj samo łączenie.</p></details>
+        <details><summary data-t="q5">Czy mogę przyjść z włosami założonymi gdzie indziej?</summary><p data-t="a5">Tak. Zdejmę stare pasma, ocenię ich stan i powiem uczciwie, czy nadają się do ponownego założenia.</p></details>
+        <details><summary data-t="q6">Ile to kosztuje?</summary><p data-t="a6">Minikapsułki kosztują 6 zł za kapsułkę, a w tej cenie są już włosy i założenie. Delikatne zagęszczenie 50 kapsułkami to 300 zł. Liczbę kapsułek dobieram na konsultacji. Cenę biotaśm podam po obejrzeniu Twoich włosów.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="block contact" id="kontakt">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <p class="label" data-t="c.label">Kontakt</p>
+          <h2 style="margin-top:10px" data-t="c.h2">Napisz, jaki efekt chcesz osiągnąć</h2>
+        </div>
+        <p data-t="c.p">Zaznacz kilka rzeczy, a wiadomość ułoży się sama. Skopiuj ją i wyślij w wiadomości prywatnej na Instagramie. Dołącz zdjęcie swoich włosów w świetle dziennym.</p>
+      </div>
+      <div class="builder">
+        <form id="f" novalidate>
+          <div class="field full">
+            <label for="name" data-t="fm.name">Imię</label>
+            <input type="text" id="name" placeholder="np. Karolina" data-ta="placeholder:fm.namePh" autocomplete="given-name">
+          </div>
+          <fieldset class="field full">
+            <legend data-t="fm.method">Metoda</legend>
+            <div class="chips">
+              <label><input type="radio" name="method" id="m1" value="m1"><span data-t="ch.m1">Minikapsułki</span></label>
+              <label><input type="radio" name="method" id="m2" value="m2"><span data-t="ch.m2">Biotaśmy</span></label>
+              <label><input type="radio" name="method" id="m3" value="m3" checked><span data-t="ch.m3">Doradź mi</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="field full">
+            <legend data-t="fm.goal">Cel</legend>
+            <div class="chips">
+              <label><input type="checkbox" name="goal" id="g1" value="g1" checked><span data-t="ch.g1">Długość</span></label>
+              <label><input type="checkbox" name="goal" id="g2" value="g2"><span data-t="ch.g2">Zagęszczenie</span></label>
+              <label><input type="checkbox" name="goal" id="g3" value="g3"><span data-t="ch.g3">Korekta</span></label>
+            </div>
+          </fieldset>
+          <div class="field">
+            <label for="now" data-t="fm.now">Moje włosy teraz</label>
+            <select id="now">
+              <option value="chin" data-t="o.chin">do brody</option>
+              <option value="shoulder" data-t="o.shoulder" selected>do ramion</option>
+              <option value="blades" data-t="o.blades">do łopatek</option>
+              <option value="mid" data-t="o.mid">do połowy pleców</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="len" data-t="fm.len">Chcę długość</label>
+            <select id="len">
+              <option value="40">40 cm</option>
+              <option value="50">50 cm</option>
+              <option value="60" selected>60 cm</option>
+              <option value="70">70 cm</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label for="notes" data-t="fm.notes">Coś jeszcze?</label>
+            <textarea id="notes" placeholder="np. mam rozjaśniane końce, wolne terminy w soboty" data-ta="placeholder:fm.notesPh"></textarea>
+          </div>
+        </form>
+        <div class="preview">
+          <p class="label" data-t="c.your">Twoja wiadomość</p>
+          <div class="bubble" id="msg" aria-live="polite"></div>
+          <div class="actions">
+            <button class="btn btn-main" type="button" id="copy" data-t="c.copy">Kopiuj wiadomość</button>
+            <a class="btn btn-ghost" href="https://ig.me/m/dariaextensions" target="_blank" rel="noopener" data-t="ig.open">Otwórz Instagram ↗</a>
+          </div>
+          <p class="status" id="status"></p>
+          <p class="note" style="margin-top:0">Instagram: <span style="user-select:all;color:var(--ink)">@dariaextensions</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="#start">Daria <i>Extensions</i></a>
+    <span data-t="foot">Poznań · Przedłużanie i zagęszczanie włosów · Skup włosów</span>
+    <a href="https://www.instagram.com/dariaextensions/" target="_blank" rel="noopener">@dariaextensions ↗</a>
+  </div>
+</footer>
+
+<script>
+/* ---------- translations (Polish is read from the page itself) ---------- */
+const I18N = {
+uk: {
+ "lang.aria":"Мова","nav.pf":"Портфоліо","nav.me":"Методи","nav.hair":"Волосся","nav.visit":"Візит","nav.buy":"Скупка волосся","nav.faq":"Питання",
+ "cta.long":"Записатися на консультацію","cta.short":"Записатися",
+ "hero.eye":"Познань · Нарощування та загущення волосся",
+ "hero.h1":"Непомітні з’єднання. <em>Природний</em> ефект.",
+ "hero.lede":"Я не «чіпляю» волосся. Я подовжую його або делікатно загущую мінікапсулами та біострічками так, щоб ніхто не здогадався, де закінчується ваше волосся, а де починається нове. Працюю лише з преміальним і незайманим волоссям.",
+ "hero.cta1":"Дізнатися про вільний час","hero.cta2":"Дивитися перевтілення ↗",
+ "fact1":"робіт в Instagram","fact2b":"від 50","fact2":"капсул для загущення","fact3":"біопротеїну","tag":"Торкніться й розчешіть ✦",
+ "pf.label":"Портфоліо","pf.h2":"Перевтілення з моєї студії",
+ "pf.p":"Справжні клієнтки, справжнє світло, без фільтрів. Натисніть на фото, щоб збільшити його. Більше робіт і відео «до і після» ви знайдете в Instagram.",
+ "w0t":"Делікатне перевтілення","w0s":"Загущення · карамельні кінчики","w0a":"Каштанове волосся з карамельними кінчиками після делікатного загущення",
+ "w1s":"Медовий блонд, хвилі","w1a":"Довгі хвилі медового блонду",
+ "w2t":"50 капсул","w2s":"Делікатне загущення","w2a":"Чорне пряме волосся, загущене капсулами",
+ "w3t":"Платина","w3s":"До 50 г волосся","w3a":"Довге платинове волосся",
+ "w4t":"Об’єм у локонах","w4s":"Делікатне загущення","w4a":"Кучеряве волосся попелястого блонду з більшим об’ємом",
+ "w5t":"Природна довжина","w5s":"Густі кінчики","w5a":"Пряме каштанове волосся з густими кінчиками",
+ "w6t":"Моя душа","w6s":"Попелястий блонд","w6a":"Попелястий блонд із темнішим коренем",
+ "w7t":"Світле омбре","w7s":"Плавний перехід кольору","w7a":"Світле омбре на прямому волоссі",
+ "w8t":"Мідь","w8s":"Теплий рудий відтінок","w8a":"Мідне волосся до лопаток",
+ "pf.more":"Дивитися 170+ робіт в Instagram ↗",
+ "lb.aria":"Збільшене фото","lb.close":"Закрити","lb.prev":"Попереднє фото","lb.next":"Наступне фото",
+ "quote":"Іноді річ не в тому, щоб волосся стало довшим. Річ у <span>густих кінчиках і абсолютній природності.</span>",
+ "m1l":"З’єднання","m1h":"Пласко, тонко, близько до шкіри","m1p":"Капсули та стрічки підбираю до товщини ваших пасом. З’єднання не стирчать, не шарудять і не виглядають з-під волосся ні на вітрі, ні в хвості.",
+ "m2l":"Загущення","m2h":"Об’єм у вашій довжині","m2p":"Часто вистачає 50 капсул, щоб зачіска ожила. Додаю густоти там, де її бракує, без навантаження на ваше волосся і без зміни довжини.",
+ "m3l":"Матеріал","m3h":"Лише справжнє волосся","m3p":"Преміальне й незаймане, зі збереженою кутикулою. Його можна фарбувати, накручувати й випрямляти так само, як власне. Відтінок складаю з кількох тонів, щоб повторити ваші відблиски.",
+ "me.label":"Методи","me.h2":"Дві техніки, один принцип",
+ "me.p":"Метод обираємо разом на консультації. Вирішують товщина й стан вашого волосся, зачіски, які ви носите щодня, і те, як часто ви можете приходити на корекцію.",
+ "mk.size":"капсула ≈ рисинка","mk.h3":"Мінікапсули","mk.p":"Маленькі кератинові з’єднання, які кріплю пасмо за пасмом. Вони дають найбільшу свободу: волосся можна високо зібрати й розчесати на будь-який бік.",
+ "dt.who":"Для кого","mk.who":"Подовження або делікатне загущення, навіть на тонкому волоссі",
+ "dt.styles":"Зачіски","mk.styles":"Високий хвіст, гулька, зібрані зачіски",
+ "dt.maint":"Корекція","mk.maint":"Зазвичай раз на 2,5–3,5 місяця",
+ "dt.fit":"Нарощування","mk.fit":"Кілька годин, залежно від кількості пасом",
+ "dt.price":"Ціна","mk.price":"<b>6 zł за капсулу</b>, у ціні волосся та нарощування (all-inclusive)",
+ "calc.pre":"Порахуйте:","calc.post":"капсул",
+ "bt.size":"стрічка пласко прилягає до шкіри","bt.h3":"Біострічки","bt.p":"Тонкі еластичні стрічки, які прилягають до голови, як друга шкіра. Швидке нарощування і дуже рівний, гладкий результат.",
+ "bt.who":"Коли хочете густоти й гладкого полотна","bt.styles":"Розпущене волосся, напівзібрані зачіски, низький хвіст","bt.maint":"Зазвичай раз на 6–8 тижнів","bt.fit":"Швидше, ніж капсули, без нагрівання",
+ "me.note":"Терміни орієнтовні. Точний план складаємо після того, як я подивлюся на ваше волосся.",
+ "h.label":"Волосся","h.h2":"Преміальне й незаймане. Жодного біопротеїну.",
+ "h.p1":"<strong>Незаймане волосся</strong> ніколи не фарбували й не обробляли хімічно. Кутикула лежить в одному напрямку, тому волосся не плутається і довго зберігає блиск.",
+ "h.p2":"<strong>Біопротеїн</strong> є штучним волокном, яке лише імітує волосся. Воно тьмяніє, плутається, не витримує високої температури, і його не можна перефарбувати. Тому я з ним не працюю.",
+ "h.p3":"Добре волосся після зняття можна наростити повторно під час корекції. Ви платите за нього один раз і носите довго.",
+ "cmp.aria":"Порівняння видів волосся","cmp.h1":"Незаймане / преміум","cmp.h2":"Біопротеїн",
+ "cmp.r1":"Фарбування","yes":"Так","no":"Ні","cmp.r2":"Плойка, випрямляч","cmp.lim":"Обмежено",
+ "cmp.r3":"Вигляд на світлі","cmp.shine":"Природний блиск","cmp.gloss":"Штучний блиск",
+ "cmp.r4":"Сплутування","cmp.min":"Мінімальне","cmp.mats":"Швидко збивається",
+ "cmp.r5":"Повторне нарощування","cmp.reuse":"Так, під час корекції","cmp.usually":"Зазвичай ні",
+ "v.label":"Візит","v.h2":"Як це відбувається крок за кроком","v.p":"Від першого повідомлення до першої корекції. На кожному етапі ви знаєте, що відбувається і скільки це триватиме.",
+ "s1h":"Консультація","s1p":"Дивлюся на ваше волосся, говоримо про бажаний результат і обираємо метод. Можна надіслати фото при денному світлі.",
+ "s2h":"Підбір волосся","s2p":"Підбираю відтінок до ваших кінчиків і коренів, узгоджуємо довжину й кількість пасом.",
+ "s3h":"Нарощування","s3p":"З’єдную волосся, а наприкінці підстригаю й філірую все разом, щоб нові пасма злилися з вашими.",
+ "s4h":"Догляд і корекція","s4p":"Ви отримуєте інструкцію з догляду й дату корекції, на якій я пересуваю з’єднання ближче до шкіри.",
+ "k.label":"Колір","k.h2":"Від платини до чорного","k.p":"Це лише відправна точка. Остаточний колір складаю з кількох тонів, підбираючи його до вашого волосся пасмо за пасмом.",
+ "sh1":"Платина","sh2":"Бежевий блонд","sh3":"Темний блонд","sh4":"Карамель","sh5":"Шоколад","sh6":"Природний чорний",
+ "b.label":"Скупка волосся","b.h2":"Куплю натуральне волосся від 45 см",
+ "b.p":"Мрієте про стильний боб або зміну іміджу? Підстрижіться в моїй студії, і ви отримаєте гроші за волосся та охайну стрижку безкоштовно.",
+ "b.big":"від 5 zł <small>/ грам</small>",
+ "b.m1":"Остаточна сума залежить від ваги, довжини й стану хвоста. Виплата одразу після стрижки та зважування: BLIK, готівкою або переказом.",
+ "b.m2":"Найдорожче оцінюю дитяче волосся і натуральні світлі відтінки.",
+ "b.acc":"Приймаю","acc1":"Довжина від 45 см, виміряна в хвості","acc2":"Натуральне нефарбоване волосся: без тонувальних шампунів, хни, ботоксу й кератину","acc3":"Густі доглянуті кінчики без сильного порідіння",
+ "b.rej":"Не приймаю","rej1":"Фарбоване волосся","rej2":"Вичіски","rej3":"Волосся зі змішаною (перевернутою) кутикулою","rej4":"Штучні та біопротеїнові пасма",
+ "b.cta":"Для попередньої оцінки надішліть у Direct фото волосся ззаду при денному світлі та його приблизну довжину.",
+ "b.copy":"Скопіювати запит на оцінку","ig.open":"Відкрити Instagram ↗",
+ "f.label":"Питання","f.h2":"Перш ніж написати","f.p":"Не знайшли свого питання? Напишіть в Instagram, я відповім особисто.",
+ "q1":"Чи буде видно з’єднання?","a1":"Не мало б. Я підбираю розмір з’єднань до товщини ваших пасом і розміщую їх так, щоб вони ховалися під натуральним волоссям навіть у зібраних зачісках.",
+ "q2":"Чи псує нарощування волосся?","a2":"Якщо метод підібрано правильно, корекції регулярні, а догляд належний, ваше волосся в безпеці. Проблеми зазвичай виникають через заважкі пасма і надто рідкі корекції.",
+ "q3":"Скільки триває нарощування?","a3":"Біострічки нарощуються швидше, мінікапсули потребують кількох годин. Час залежить від кількості пасом, точніше скажу після консультації.",
+ "q4":"Чи можна фарбувати й випрямляти нарощене волосся?","a4":"Так. Преміальне й незаймане волосся витримує фарбування, плойку та випрямляч. Використовуйте термозахист і не торкайтеся самих з’єднань.",
+ "q5":"Чи можна прийти з волоссям, нарощеним деінде?","a5":"Так. Я зніму старі пасма, оціню їхній стан і чесно скажу, чи придатні вони для повторного нарощування.",
+ "q6":"Скільки це коштує?","a6":"Мінікапсули коштують 6 zł за капсулу, і в цю ціну вже входять волосся та нарощування. Делікатне загущення 50 капсулами коштує 300 zł. Кількість капсул підбираю на консультації. Ціну біострічок назву, коли подивлюся на ваше волосся.",
+ "c.label":"Контакт","c.h2":"Напишіть, який результат хочете отримати",
+ "c.p":"Позначте кілька пунктів, і повідомлення складеться саме. Скопіюйте його й надішліть в особисті повідомлення в Instagram. Додайте фото свого волосся при денному світлі.",
+ "fm.name":"Ім’я","fm.namePh":"напр. Олена","fm.method":"Метод","ch.m1":"Мінікапсули","ch.m2":"Біострічки","ch.m3":"Порадьте мені",
+ "fm.goal":"Мета","ch.g1":"Довжина","ch.g2":"Загущення","ch.g3":"Корекція",
+ "fm.now":"Моє волосся зараз","o.chin":"до підборіддя","o.shoulder":"до плечей","o.blades":"до лопаток","o.mid":"до середини спини",
+ "fm.len":"Бажана довжина","fm.notes":"Щось іще?","fm.notesPh":"напр. освітлені кінчики, зручно в суботу",
+ "c.your":"Ваше повідомлення","c.copy":"Скопіювати повідомлення",
+ "foot":"Познань · Нарощування та загущення волосся · Скупка волосся"
+},
+en: {
+ "lang.aria":"Language","nav.pf":"Portfolio","nav.me":"Methods","nav.hair":"Hair","nav.visit":"Your visit","nav.buy":"Hair buying","nav.faq":"FAQ",
+ "cta.long":"Book a consultation","cta.short":"Book",
+ "hero.eye":"Poznań · Hair extensions & volume",
+ "hero.h1":"Invisible bonds. <em>Natural</em> results.",
+ "hero.lede":"I don’t just “attach” hair. I lengthen it or add subtle volume with micro capsules and tape-ins, so no one can tell where your hair ends and the new hair begins. I work only with premium and virgin hair.",
+ "hero.cta1":"Ask for a date","hero.cta2":"See transformations ↗",
+ "fact1":"works on Instagram","fact2b":"from 50","fact2":"capsules for volume","fact3":"bioprotein","tag":"Touch to comb ✦",
+ "pf.label":"Portfolio","pf.h2":"Transformations from my studio",
+ "pf.p":"Real clients, real light, no filters. Tap a photo to enlarge it. You’ll find more work and before-and-after videos on Instagram.",
+ "w0t":"Subtle makeover","w0s":"Volume · caramel ends","w0a":"Brown hair with caramel ends after a subtle volume boost",
+ "w1s":"Honey blonde, waves","w1a":"Long honey-blonde waves",
+ "w2t":"50 capsules","w2s":"Subtle volume","w2a":"Straight black hair thickened with capsules",
+ "w3t":"Platinum","w3s":"Up to 50 g of hair","w3a":"Long platinum hair",
+ "w4t":"Volume in curls","w4s":"Subtle volume","w4a":"Curly ash-blonde hair with added volume",
+ "w5t":"Natural length","w5s":"Thick ends","w5a":"Straight chestnut hair with thick ends",
+ "w6t":"My soul","w6s":"Ash blonde","w6a":"Ash blonde with a darker root",
+ "w7t":"Light ombré","w7s":"Smooth colour blend","w7a":"Light ombré on straight hair",
+ "w8t":"Copper","w8s":"Warm copper tone","w8a":"Copper hair to the shoulder blades",
+ "pf.more":"See 170+ works on Instagram ↗",
+ "lb.aria":"Enlarged photo","lb.close":"Close","lb.prev":"Previous photo","lb.next":"Next photo",
+ "quote":"Sometimes it isn’t about longer hair. It’s about <span>thick ends and complete naturalness.</span>",
+ "m1l":"Bonds","m1h":"Flat, thin, close to the scalp","m1p":"I match capsules and tapes to the thickness of your strands. The bonds don’t stick out, don’t rustle, and don’t show in the wind or in a ponytail.",
+ "m2l":"Volume","m2h":"Volume at your length","m2p":"Often 50 capsules are enough to bring a hairstyle to life. I add density where it’s missing, without weighing your hair down or changing its length.",
+ "m3l":"Material","m3h":"Only real hair","m3p":"Premium and virgin, with the cuticle intact. You can colour, curl and straighten it just like your own. I blend several tones to match your highlights.",
+ "me.label":"Methods","me.h2":"Two techniques, one principle",
+ "me.p":"We choose the method together at the consultation. It depends on the thickness and condition of your hair, the styles you wear every day, and how often you can come in for maintenance.",
+ "mk.size":"capsule ≈ a grain of rice","mk.h3":"Micro capsules","mk.p":"Small keratin bonds placed strand by strand. They give you the most freedom: wear your hair up high or part it any way you like.",
+ "dt.who":"Best for","mk.who":"Lengthening or subtle volume, even on fine hair",
+ "dt.styles":"Styles","mk.styles":"High ponytail, bun, updos",
+ "dt.maint":"Maintenance","mk.maint":"Usually every 2.5–3.5 months",
+ "dt.fit":"Fitting","mk.fit":"A few hours, depending on the number of strands",
+ "dt.price":"Price","mk.price":"<b>6 zł per capsule</b>, hair and fitting included (all-inclusive)",
+ "calc.pre":"Estimate:","calc.post":"capsules",
+ "bt.size":"tape lies flat to the scalp","bt.h3":"Tape-ins","bt.p":"Thin, flexible tapes that sit on the scalp like a second skin. Quick to fit, with a very even, sleek result.",
+ "bt.who":"When you want density and a sleek finish","bt.styles":"Worn down, half-up, low ponytail","bt.maint":"Usually every 6–8 weeks","bt.fit":"Faster than capsules, no heat used",
+ "me.note":"Times are approximate. We set an exact plan after I’ve seen your hair.",
+ "h.label":"Hair","h.h2":"Premium and virgin. No bioprotein.",
+ "h.p1":"<strong>Virgin hair</strong> has never been coloured or chemically treated. The cuticle runs in one direction, so it doesn’t tangle and keeps its shine for a long time.",
+ "h.p2":"<strong>Bioprotein</strong> is a synthetic fibre that only imitates hair. It turns dull, tangles, can’t take high heat and can’t be recoloured. That’s why I don’t work with it.",
+ "h.p3":"Good hair can be refitted at your maintenance visit after removal. You pay for it once and wear it for a long time.",
+ "cmp.aria":"Hair type comparison","cmp.h1":"Virgin / premium","cmp.h2":"Bioprotein",
+ "cmp.r1":"Colouring","yes":"Yes","no":"No","cmp.r2":"Curling iron, straightener","cmp.lim":"Limited",
+ "cmp.r3":"In the light","cmp.shine":"Natural shine","cmp.gloss":"Artificial gloss",
+ "cmp.r4":"Tangling","cmp.min":"Minimal","cmp.mats":"Mats quickly",
+ "cmp.r5":"Reuse","cmp.reuse":"Yes, at maintenance","cmp.usually":"Usually not",
+ "v.label":"Your visit","v.h2":"How it works, step by step","v.p":"From your first message to your first maintenance visit. At every stage you know what’s happening and how long it will take.",
+ "s1h":"Consultation","s1p":"I look at your hair, we talk about the result you want and choose a method. You can send photos taken in daylight.",
+ "s2h":"Choosing the hair","s2p":"I match the shade to your ends and roots, and we agree on the length and number of strands.",
+ "s3h":"Fitting","s3p":"I attach the hair, then cut and blend everything so the new strands merge with yours.",
+ "s4h":"Care and maintenance","s4p":"You get care instructions and a maintenance date, when I move the bonds back up close to the scalp.",
+ "k.label":"Colour","k.h2":"From platinum to black","k.p":"This is only a starting point. I build the final colour from several tones, matching it to your hair strand by strand.",
+ "sh1":"Platinum","sh2":"Beige blonde","sh3":"Dark blonde","sh4":"Caramel","sh5":"Chocolate","sh6":"Natural black",
+ "b.label":"Hair buying","b.h2":"I buy natural hair from 45 cm",
+ "b.p":"Dreaming of a sleek bob or a new look? Cut your hair in my studio and you’ll get paid for it, plus a polished haircut for free.",
+ "b.big":"from 5 zł <small>/ gram</small>",
+ "b.m1":"The final amount depends on the weight, length and condition of the ponytail. Paid right after cutting and weighing: BLIK, cash or bank transfer.",
+ "b.m2":"Children’s hair and natural light shades get the highest price.",
+ "b.acc":"I accept","acc1":"Length from 45 cm, measured in a ponytail","acc2":"Natural, uncoloured hair: no tinted shampoos, henna, botox or keratin","acc3":"Thick, healthy ends without heavy thinning",
+ "b.rej":"I don’t accept","rej1":"Coloured hair","rej2":"Combed-out hair","rej3":"Hair with mixed (reversed) cuticles","rej4":"Synthetic or bioprotein strands",
+ "b.cta":"For an initial quote, send a photo of your hair from behind in daylight and its approximate length via Direct.",
+ "b.copy":"Copy quote request","ig.open":"Open Instagram ↗",
+ "f.label":"FAQ","f.h2":"Before you write","f.p":"Don’t see your question? Message me on Instagram and I’ll answer personally.",
+ "q1":"Will the bonds be visible?","a1":"They shouldn’t be. I match the bond size to your strands and place them so they hide under your natural hair, even in updos.",
+ "q2":"Do extensions damage your hair?","a2":"With the right method, regular maintenance and proper care, your hair stays safe. Problems usually come from strands that are too heavy and maintenance that’s too infrequent.",
+ "q3":"How long does fitting take?","a3":"Tape-ins are quicker, while micro capsules take a few hours. Timing depends on the number of strands, and I’ll give you an exact estimate after the consultation.",
+ "q4":"Can I colour and straighten the extensions?","a4":"Yes. Premium and virgin hair can be coloured, curled and straightened. Use heat protection and avoid the bonds themselves.",
+ "q5":"Can I come in with extensions done elsewhere?","a5":"Yes. I’ll remove the old strands, check their condition and tell you honestly whether they can be refitted.",
+ "q6":"How much does it cost?","a6":"Micro capsules cost 6 zł per capsule, with hair and fitting included. A subtle volume boost with 50 capsules is 300 zł. I choose the number of capsules at the consultation. I’ll quote tape-ins once I’ve seen your hair.",
+ "c.label":"Contact","c.h2":"Tell me the result you’re after",
+ "c.p":"Tick a few options and the message writes itself. Copy it and send it as a direct message on Instagram. Add a photo of your hair in daylight.",
+ "fm.name":"Name","fm.namePh":"e.g. Emma","fm.method":"Method","ch.m1":"Micro capsules","ch.m2":"Tape-ins","ch.m3":"Advise me",
+ "fm.goal":"Goal","ch.g1":"Length","ch.g2":"Volume","ch.g3":"Maintenance",
+ "fm.now":"My hair now","o.chin":"chin length","o.shoulder":"shoulder length","o.blades":"to the shoulder blades","o.mid":"mid-back",
+ "fm.len":"Desired length","fm.notes":"Anything else?","fm.notesPh":"e.g. lightened ends, Saturdays work best",
+ "c.your":"Your message","c.copy":"Copy message",
+ "foot":"Poznań · Hair extensions & volume · Hair buying"
+}};
+
+const MSG = {
+ pl:{hi:"Dzień dobry",intro:", tu ",ask:"Chciałabym umówić się na konsultację w sprawie przedłużania włosów.",method:"Metoda",
+     methods:{m1:"minikapsułki",m2:"biotaśmy",m3:"nie wiem, proszę o poradę"},goal:"Zależy mi na",
+     goals:{g1:"długość",g2:"zagęszczenie",g3:"korekta obecnych pasm"},none:"jeszcze nie wiem",now:"Moje włosy teraz",len:"Docelowa długość",
+     notes:"Uwagi",end:"W załączniku zdjęcie moich włosów. Kiedy masz wolny termin?",unit:"cm",
+     copied:"Skopiowano. Wklej wiadomość w Instagram Direct.",sel:"Tekst zaznaczony. Skopiuj go skrótem Ctrl+C lub z menu.",
+     skup:"Dzień dobry!\nChciałabym sprzedać swoje włosy i poznać wstępną wycenę.\n\n• Długość w kucyku: … cm\n• Włosy naturalne, niefarbowane: tak\n\nW załączniku zdjęcie włosów od tyłu w świetle dziennym.",
+     skupOk:"Skopiowano. Uzupełnij długość i dołącz zdjęcie w Instagram Direct.",skupFail:"Nie udało się skopiować. Napisz: „Chcę sprzedać włosy, długość … cm” i dołącz zdjęcie.",
+     hints:["delikatne zagęszczenie","wyraźna objętość","przedłużanie i pełna gęstość"],locale:"pl-PL"},
+ uk:{hi:"Добрий день",intro:", це ",ask:"Хочу записатися на консультацію щодо нарощування волосся.",method:"Метод",
+     methods:{m1:"мінікапсули",m2:"біострічки",m3:"не знаю, потрібна порада"},goal:"Мені важливо",
+     goals:{g1:"довжина",g2:"загущення",g3:"корекція наявних пасом"},none:"ще не знаю",now:"Моє волосся зараз",len:"Бажана довжина",
+     notes:"Примітки",end:"Додаю фото свого волосся. Коли у вас є вільний час?",unit:"см",
+     copied:"Скопійовано. Вставте повідомлення в Instagram Direct.",sel:"Текст виділено. Скопіюйте його через Ctrl+C або меню.",
+     skup:"Добрий день!\nХочу продати своє волосся і дізнатися попередню ціну.\n\n• Довжина в хвості: … см\n• Волосся натуральне, нефарбоване: так\n\nДодаю фото волосся ззаду при денному світлі.",
+     skupOk:"Скопійовано. Допишіть довжину й додайте фото в Instagram Direct.",skupFail:"Не вдалося скопіювати. Напишіть: «Хочу продати волосся, довжина … см» і додайте фото.",
+     hints:["делікатне загущення","помітний об’єм","подовження й повна густота"],locale:"uk-UA"},
+ en:{hi:"Hello",intro:", it’s ",ask:"I’d like to book a consultation about hair extensions.",method:"Method",
+     methods:{m1:"micro capsules",m2:"tape-ins",m3:"not sure, I’d like advice"},goal:"I’m looking for",
+     goals:{g1:"length",g2:"volume",g3:"maintenance of my current extensions"},none:"not sure yet",now:"My hair now",len:"Desired length",
+     notes:"Notes",end:"I’ve attached a photo of my hair. When do you have a free slot?",unit:"cm",
+     copied:"Copied. Paste the message into Instagram Direct.",sel:"Text selected. Copy it with Ctrl+C or from the menu.",
+     skup:"Hello!\nI’d like to sell my hair and get an initial quote.\n\n• Length in a ponytail: … cm\n• Natural, uncoloured hair: yes\n\nI’ve attached a photo of my hair from behind in daylight.",
+     skupOk:"Copied. Add the length and attach the photo in Instagram Direct.",skupFail:"Couldn’t copy. Write “I want to sell my hair, length … cm” and attach a photo.",
+     hints:["subtle volume","noticeable volume","lengthening and full density"],locale:"en-GB"}
+};
+
+const LANG = (function(){
+  const PL = {}, PLA = [];
+  document.querySelectorAll('[data-t]').forEach(el=>{ const k = el.dataset.t; if(!(k in PL)) PL[k] = el.innerHTML; });
+  document.querySelectorAll('[data-ta]').forEach(el=>{
+    el.dataset.ta.split(';').forEach(pair=>{ const [attr,key] = pair.split(':'); if(!(key in PL)) PL[key] = el.getAttribute(attr) || ''; });
+  });
+  I18N.pl = PL;
+  const subs = [];
+  const state = {cur:'pl', on(fn){ subs.push(fn); }, set};
+  function set(lang){
+    if(!I18N[lang]) lang = 'pl';
+    state.cur = lang;
+    const d = I18N[lang];
+    document.querySelectorAll('[data-t]').forEach(el=>{ const v = d[el.dataset.t]; el.innerHTML = v != null ? v : PL[el.dataset.t]; });
+    document.querySelectorAll('[data-ta]').forEach(el=>{
+      el.dataset.ta.split(';').forEach(pair=>{ const [attr,key] = pair.split(':'); const v = d[key]; el.setAttribute(attr, v != null ? v : PL[key]); });
+    });
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.lang button').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+    try{ localStorage.setItem('de-lang', lang); }catch(e){}
+    subs.forEach(fn=>fn(lang));
+  }
+  document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click', ()=>set(b.dataset.lang)));
+  return state;
+})();
+
+/* hair strands in the arched mirror */
+(function(){
+  const c = document.getElementById('strands');
+  const ctx = c.getContext('2d');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let W=0,H=0,strands=[],colors={};
+  function readColors(){
+    const s = getComputedStyle(document.documentElement);
+    colors = {a:s.getPropertyValue('--gold').trim(), b:s.getPropertyValue('--gold-2').trim(), c:s.getPropertyValue('--gold-3').trim()};
+  }
+  function rnd(seed){ let x = Math.sin(seed*999.13)*43758.5453; return x - Math.floor(x); }
+  function build(){
+    const r = c.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio||1, 2);
+    W = r.width; H = r.height;
+    c.width = Math.round(W*dpr); c.height = Math.round(H*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    const n = Math.round(W/3.2);
+    strands = [];
+    for(let i=0;i<n;i++){
+      const t = i/n;
+      strands.push({
+        x: W*0.06 + t*W*0.88 + (rnd(i)-.5)*10,
+        top: H*0.08 + Math.pow(Math.abs(t-.5)*2,2)*H*0.2 + rnd(i+3)*12,
+        len: H*(0.72 + rnd(i+7)*0.22),
+        sway: 8 + rnd(i+11)*22,
+        phase: rnd(i+13)*Math.PI*2,
+        w: .5 + rnd(i+17)*1.1,
+        tone: rnd(i+19)
+      });
+    }
+  }
+  const P = {x:-999,y:-999,on:false,vx:0};
+  const mirror = document.getElementById('mirror');
+  mirror.addEventListener('pointermove', e=>{
+    const r = c.getBoundingClientRect();
+    const nx = e.clientX - r.left;
+    P.vx = P.on ? nx - P.x : 0;
+    P.x = nx; P.y = e.clientY - r.top; P.on = true;
+  });
+  mirror.addEventListener('pointerleave', ()=>{ P.on=false; });
+  mirror.addEventListener('pointercancel', ()=>{ P.on=false; });
+  function physics(){
+    const R = Math.max(46, W*0.13);
+    for(const s of strands){
+      let target = 0;
+      if(P.on && P.y > s.top){
+        const dx = s.x - P.x;
+        const ad = Math.abs(dx);
+        if(ad < R){
+          const depth = Math.min(1,(P.y - s.top)/(s.len*0.6));
+          target = Math.sign(dx||1) * (R - ad) * 1.1 * depth + P.vx*0.6*(1-ad/R);
+        }
+      }
+      s.vel = (s.vel||0) + (target - (s.off||0))*0.09;
+      s.vel *= 0.8;
+      s.off = (s.off||0) + s.vel;
+    }
+    P.vx *= 0.7;
+  }
+  function draw(time){
+    ctx.clearRect(0,0,W,H);
+    const tt = time/1000;
+    if(!reduce) physics();
+    for(const s of strands){
+      const sw = Math.sin(tt*0.6 + s.phase)*s.sway + (s.off||0);
+      const g = ctx.createLinearGradient(0,s.top,0,s.top+s.len);
+      const mid = s.tone < .33 ? colors.c : s.tone < .7 ? colors.a : colors.b;
+      g.addColorStop(0, colors.c);
+      g.addColorStop(.35, mid);
+      g.addColorStop(1, colors.b);
+      ctx.strokeStyle = g;
+      ctx.globalAlpha = .55 + s.tone*.4;
+      ctx.lineWidth = s.w;
+      ctx.beginPath();
+      ctx.moveTo(s.x, s.top);
+      ctx.bezierCurveTo(s.x + sw*.2, s.top + s.len*.35, s.x - sw*.6, s.top + s.len*.7, s.x + sw, s.top + s.len);
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+  }
+  function loop(t){ draw(t); if(!reduce) requestAnimationFrame(loop); }
+  readColors(); build(); requestAnimationFrame(loop);
+  window.addEventListener('resize', ()=>{ build(); if(reduce) draw(0); });
+  const mq = window.matchMedia('(prefers-color-scheme: dark)');
+  const recolor = ()=>{ readColors(); if(reduce) draw(0); };
+  mq.addEventListener && mq.addEventListener('change', recolor);
+  new MutationObserver(recolor).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+})();
+
+/* portfolio lightbox */
+(function(){
+  const items = [...document.querySelectorAll('.work')];
+  const lb = document.getElementById('lb');
+  const img = document.getElementById('lb-img');
+  const t = document.getElementById('lb-t'), s = document.getElementById('lb-s'), n = document.getElementById('lb-n');
+  let cur = 0;
+  function show(i){
+    cur = (i + items.length) % items.length;
+    const el = items[cur], im = el.querySelector('img');
+    img.src = im.getAttribute('src'); img.alt = im.alt;
+    t.textContent = el.querySelector('b').textContent;
+    s.textContent = el.querySelector('small').textContent;
+    n.textContent = (cur+1) + ' / ' + items.length;
+    img.style.animation = 'none'; void img.offsetWidth; img.style.animation = '';
+  }
+  items.forEach((el,i)=>el.addEventListener('click', ()=>{
+    show(i);
+    if(typeof lb.showModal === 'function'){ lb.showModal(); } else { lb.setAttribute('open',''); }
+  }));
+  document.getElementById('lb-close').addEventListener('click', ()=>lb.close ? lb.close() : lb.removeAttribute('open'));
+  document.getElementById('lb-prev').addEventListener('click', ()=>show(cur-1));
+  document.getElementById('lb-next').addEventListener('click', ()=>show(cur+1));
+  lb.addEventListener('click', e=>{ if(e.target === lb) lb.close(); });
+  lb.addEventListener('keydown', e=>{ if(e.key==='ArrowLeft') show(cur-1); if(e.key==='ArrowRight') show(cur+1); });
+  let sx = null;
+  lb.addEventListener('touchstart', e=>{ sx = e.touches[0].clientX; }, {passive:true});
+  lb.addEventListener('touchend', e=>{ if(sx===null) return; const d = e.changedTouches[0].clientX - sx; if(Math.abs(d)>50) show(cur + (d<0?1:-1)); sx=null; });
+  LANG.on(()=>{ if(lb.open) show(cur); });
+})();
+
+/* capsule price calculator */
+(function(){
+  const r = document.getElementById('caps');
+  const nEl = document.getElementById('caps-n'), pEl = document.getElementById('caps-p'), hEl = document.getElementById('caps-h');
+  function upd(){
+    const m = MSG[LANG.cur], v = +r.value;
+    nEl.textContent = v;
+    pEl.textContent = (v*6).toLocaleString(m.locale) + ' zł';
+    hEl.textContent = m.hints[v <= 60 ? 0 : v <= 120 ? 1 : 2];
+  }
+  r.addEventListener('input', upd); LANG.on(upd); upd();
+})();
+
+/* message builder */
+(function(){
+  const f = document.getElementById('f');
+  const out = document.getElementById('msg');
+  const status = document.getElementById('status');
+  const lenSel = document.getElementById('len');
+  function compose(){
+    const m = MSG[LANG.cur];
+    const name = document.getElementById('name').value.trim();
+    const method = (f.querySelector('input[name=method]:checked')||{}).value || 'm3';
+    const goals = [...f.querySelectorAll('input[name=goal]:checked')].map(i=>m.goals[i.value]);
+    const nowSel = document.getElementById('now');
+    const now = nowSel.options[nowSel.selectedIndex].textContent;
+    const notes = document.getElementById('notes').value.trim();
+    let t = m.hi + (name ? m.intro + name : '') + '!\n';
+    t += m.ask + '\n\n';
+    t += '• ' + m.method + ': ' + m.methods[method] + '\n';
+    t += '• ' + m.goal + ': ' + (goals.length ? goals.join(', ') : m.none) + '\n';
+    t += '• ' + m.now + ': ' + now + '\n';
+    t += '• ' + m.len + ': ' + lenSel.value + ' ' + m.unit + '\n';
+    if(notes) t += '• ' + m.notes + ': ' + notes + '\n';
+    t += '\n' + m.end;
+    out.textContent = t;
+    return t;
+  }
+  function units(){ const u = MSG[LANG.cur].unit; [...lenSel.options].forEach(o=>{ o.textContent = o.value + ' ' + u; }); }
+  f.addEventListener('input', compose);
+  f.addEventListener('change', compose);
+  f.addEventListener('submit', e=>e.preventDefault());
+  LANG.on(()=>{ units(); compose(); status.textContent=''; st2.textContent=''; });
+  document.getElementById('copy').addEventListener('click', ()=>{
+    const t = compose();
+    const fallback = ()=>{
+      const r = document.createRange(); r.selectNodeContents(out);
+      const s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      status.textContent = MSG[LANG.cur].sel;
+    };
+    try{
+      navigator.clipboard.writeText(t).then(()=>{ status.textContent = MSG[LANG.cur].copied; }, fallback);
+    }catch(e){ fallback(); }
+  });
+  const st2 = document.getElementById('status-skup');
+  document.getElementById('copy-skup').addEventListener('click', ()=>{
+    const m = MSG[LANG.cur];
+    const fb = ()=>{ st2.textContent = m.skupFail; };
+    try{ navigator.clipboard.writeText(m.skup).then(()=>{ st2.textContent = m.skupOk; }, fb); }catch(e){ fb(); }
+  });
+  units(); compose();
+})();
+
+/* pick the starting language: saved choice, then the browser's language, then Polish */
+(function(){
+  let lang = null;
+  try{ lang = localStorage.getItem('de-lang'); }catch(e){}
+  if(!lang){
+    const nav = (navigator.languages && navigator.languages[0] || navigator.language || 'pl').toLowerCase();
+    lang = /^(uk|ru|be)/.test(nav) ? 'uk' : /^pl/.test(nav) ? 'pl' : /^en/.test(nav) ? 'en' : 'pl';
+  }
+  if(lang !== 'pl') LANG.set(lang);
+})();
+</script>
+</body>
+</html>
