@@ -4,213 +4,140 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Daria Extensions</title>
-<meta name="description" content="Przedłużanie włosów metodą minikapsułek i biotaśm. Niewidoczne łączenia, włosy premium i dziewicze, bez bioproteiny.">
+<meta name="description" content="Przedłużanie i zagęszczanie włosów w Poznaniu: minikapsułki i biotaśmy. Niewidoczne łączenia, włosy premium i dziewicze, bez bioproteiny.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Playfair+Display:ital,wght@0,400..600;1,400..600&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Onest:wght@400..700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: arched hero "mirror" with live hair strands, then a quiet editorial column — methods compared side by side, hair, process, shades, message builder. */
+/* Layout: the page is a hair-shade chart. Six chapters run from platinum (10/01) down to natural black (1/0) and blend into each other like an ombré. A hair curtain hangs from the top edge of the hero; a fixed swatch strip tracks the current chapter. One committed look, no theme switch. */
 :root{
-  --bg:#EEEBEA; --surface:#F8F6F5; --ink:#1F1A1B; --muted:#675E60; --line:#D8D1CF;
-  --rose:#6A2F3B; --rose-ink:#FFF8F6;
-  --gold:#B8935F; --gold-2:#E4CDA6; --gold-3:#86643E;
-  --display:"Bodoni Moda", "Playfair Display", "Didot", "Bodoni 72", Georgia, serif; /* Playfair supplies the Cyrillic glyphs Bodoni lacks */
-  --body:"Manrope", "Segoe UI", system-ui, sans-serif;
-  --mono:"IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
-  --s-1:.8125rem; --s0:1rem; --s1:1.25rem; --s2:1.75rem; --s3:2.5rem; --s4:clamp(2.6rem,6.4vw,5.4rem);
-  --gutter-l:max(16px, env(safe-area-inset-left, 0px));
-  --gutter-r:max(16px, env(safe-area-inset-right, 0px));
+  --s1:#EFE9DD; --s2:#E3D3B4; --s3:#C2A77F; --s4:#835630; --s5:#4A3327; --s6:#191312;
+  --display:"Cormorant","Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --body:"Onest","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  --gl:max(18px,env(safe-area-inset-left,0px)); --gr:max(18px,env(safe-area-inset-right,0px));
+  --blend:clamp(90px,15vw,180px);
+  color-scheme:light;
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#151213; --surface:#1E1A1B; --ink:#F0EAE6; --muted:#A99E9F; --line:#352D2F;
-    --rose:#D9979F; --rose-ink:#1B1213;
-    --gold:#D6B583; --gold-2:#F0DDBA; --gold-3:#9D7B51;
-    color-scheme:dark;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#151213; --surface:#1E1A1B; --ink:#F0EAE6; --muted:#A99E9F; --line:#352D2F;
-  --rose:#D9979F; --rose-ink:#1B1213;
-  --gold:#D6B583; --gold-2:#F0DDBA; --gold-3:#9D7B51;
-  color-scheme:dark;
-}
+.c1{--bg:var(--s1);--from:var(--s1);--ink:#241A15;--mut:#6B5D52;--line:#D6CBB8;--card:#F7F3EA;--acc:#8A5C33}
+.c2{--bg:var(--s2);--from:var(--s1);--ink:#241A15;--mut:#63523F;--line:#CBB68E;--card:#EEE2CA;--acc:#7A4E28}
+.c3{--bg:var(--s3);--from:var(--s2);--ink:#21160F;--mut:#45331F;--line:#A68A60;--card:#D4BE9B;--acc:#5E3A1C}
+.c4{--bg:var(--s4);--from:var(--s3);--ink:#FFF6E8;--mut:#F6E6CF;--line:#A27649;--card:#744A28;--acc:#F3D9A8}
+.c5{--bg:var(--s5);--from:var(--s4);--ink:#F5EADA;--mut:#CDB9A3;--line:#664B3B;--card:#583E31;--acc:#E4C590;color-scheme:dark}
+.c6{--bg:var(--s6);--from:var(--s5);--ink:#F2E8DA;--mut:#A99A8B;--line:#382C28;--card:#241C1A;--acc:#E4C590;color-scheme:dark}
 
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
-@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
-body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:var(--s0);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--s1);color:#241A15;font-family:var(--body);font-size:1rem;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit}
-h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.05;text-wrap:balance;margin:0}
 p{margin:0}
-:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+h1,h2,h3{font-family:var(--display);font-weight:300;line-height:1;margin:0;text-wrap:balance;letter-spacing:-.01em}
+[id]{scroll-margin-top:84px}
+:focus-visible{outline:2px solid var(--acc,#8A5C33);outline-offset:3px;border-radius:4px}
 
-.wrap{max-width:1180px;margin:0 auto;padding-left:var(--gutter-l);padding-right:var(--gutter-r)}
-.label{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.wrap{max-width:1200px;margin-inline:auto;padding-left:var(--gl);padding-right:var(--gr)}
+.label{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
 
-/* header */
-.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
-.logo{font-family:var(--display);font-size:1.35rem;text-decoration:none;letter-spacing:.01em}
-.logo i{color:var(--gold-3)}
-.nav{display:flex;gap:26px;align-items:center;font-size:.9rem}
-.nav a{text-decoration:none;color:var(--muted)}
-.nav a:hover{color:var(--ink)}
+/* chapters */
+.ch{position:relative;color:var(--ink);background:linear-gradient(180deg,var(--from) 0,var(--bg) var(--blend));padding-top:calc(var(--blend) + clamp(20px,3vw,44px));padding-bottom:clamp(56px,8vw,110px)}
+.sec + .sec{margin-top:clamp(72px,10vw,130px)}
+.swatch{display:flex;align-items:center;gap:12px;margin-bottom:clamp(26px,4vw,48px);font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.swatch i{width:40px;height:14px;border-radius:3px;border:1px solid color-mix(in srgb,var(--ink) 40%,transparent);background:repeating-linear-gradient(90deg,transparent 0 3px,color-mix(in srgb,var(--ink) 16%,transparent) 3px 4px)}
+.head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px 56px;align-items:end;margin-bottom:clamp(28px,4.5vw,56px)}
+.head h2,.h2{font-size:clamp(2.3rem,5.2vw,4.1rem)}
+.head h2{margin-top:10px}
+.head > p{color:var(--mut);max-width:34rem}
+@media (max-width:760px){.head{grid-template-columns:1fr}}
 
-.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:999px;font-weight:600;font-size:.92rem;text-decoration:none;border:1px solid transparent;cursor:pointer;font-family:var(--body);transition:transform .2s ease, background .2s ease}
-.btn-main{background:var(--rose);color:var(--rose-ink)}
-.btn-main:hover{transform:translateY(-1px)}
-.btn-ghost{border-color:var(--line);color:var(--ink);background:transparent}
-.btn-ghost:hover{border-color:var(--gold)}
-.tools{display:flex;align-items:center;gap:12px;flex:none}
-.nav-cta{padding:9px 16px;white-space:nowrap}
-.nav-cta .short{display:none}
-.lang{display:flex;border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px}
-.lang button{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;border:0;background:transparent;color:var(--muted);padding:6px 9px;border-radius:999px;cursor:pointer;transition:background .2s,color .2s}
-.lang button:hover{color:var(--ink)}
-.lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
-@media (max-width:1240px){.nav{gap:18px}.nav-cta .long{display:none}.nav-cta .short{display:inline}}
-@media (max-width:1080px){.nav{display:none}}
-.top .logo{white-space:nowrap}
-@media (max-width:520px){.nav-cta .long{display:none}.nav-cta .short{display:inline}.top .logo{font-size:1.15rem}.tools{gap:8px}}
-@media (max-width:440px){.nav-cta{display:none}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 24px;border-radius:999px;font:600 .93rem var(--body);text-decoration:none;border:1px solid transparent;cursor:pointer;transition:transform .2s ease,background .2s ease,border-color .2s ease}
+.btn-main{background:var(--ink);color:var(--bg)}
+.btn-main:hover{transform:translateY(-2px)}
+.btn-ghost{border-color:color-mix(in srgb,var(--ink) 38%,transparent);color:var(--ink);background:transparent}
+.btn-ghost:hover{border-color:var(--ink)}
+
+/* floating nav */
+.top{position:fixed;z-index:20;top:calc(10px + env(safe-area-inset-top,0px));left:max(12px,env(safe-area-inset-left,0px));right:max(12px,env(safe-area-inset-right,0px));display:flex;justify-content:center;pointer-events:none}
+.pill{pointer-events:auto;display:flex;align-items:center;gap:22px;max-width:100%;padding:7px 7px 7px 22px;border-radius:999px;background:rgba(25,19,18,.9);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);color:#F2E8DA;box-shadow:0 10px 30px rgba(25,19,18,.18)}
+.logo{font-family:var(--display);font-size:1.4rem;font-weight:500;text-decoration:none;white-space:nowrap;letter-spacing:.01em}
+.logo i{color:#E4C590;font-weight:400}
+.nav{display:flex;gap:20px;font-size:.88rem}
+.nav a{text-decoration:none;color:#CFC2B2;white-space:nowrap}
+.nav a:hover{color:#fff}
+.lang{display:flex;gap:2px;padding:3px;border-radius:999px;border:1px solid rgba(242,232,218,.22)}
+.lang button{font:500 .7rem var(--mono);letter-spacing:.08em;border:0;background:transparent;color:#B9AB9B;padding:6px 9px;border-radius:999px;cursor:pointer}
+.lang button:hover{color:#fff}
+.lang button[aria-pressed="true"]{background:#F2E8DA;color:#191312}
+.pill .cta{background:#E4C590;color:#191312;padding:10px 18px;border-radius:999px;font:600 .86rem var(--body);text-decoration:none;white-space:nowrap}
+@media (max-width:1120px){.nav{display:none}}
+@media (max-width:560px){.pill{width:100%;justify-content:space-between;padding-left:18px}.pill .cta{display:none}.logo{font-size:1.25rem}}
+
+/* shade index */
+.idx{position:fixed;z-index:15;right:calc(14px + env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%);display:none;flex-direction:column;gap:6px;align-items:flex-end}
+.idx a{display:flex;align-items:center;justify-content:flex-end;height:26px;width:16px;border-radius:4px;background:var(--c);border:1px solid rgba(255,255,255,.75);box-shadow:0 0 0 1px rgba(25,19,18,.35);text-decoration:none;overflow:hidden;transition:width .35s cubic-bezier(.2,.7,.2,1)}
+.idx a span{font:500 .62rem var(--mono);letter-spacing:.06em;padding-right:6px;opacity:0;transition:opacity .2s;white-space:nowrap}
+.idx a.on,.idx a:hover{width:54px}
+.idx a.on span,.idx a:hover span{opacity:1}
+@media (min-width:1280px){.idx{display:flex}}
 
 /* hero */
-.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(28px,5vw,72px);align-items:center;padding-block:clamp(40px,7vw,88px)}
-.hero h1{font-size:var(--s4);letter-spacing:-.01em}
-.hero h1 em{color:var(--gold-3);font-style:italic}
-.hero .lede{margin-top:26px;max-width:34rem;font-size:1.08rem;color:var(--muted)}
-.hero .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
-.hero .facts{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:40px;padding-top:22px;border-top:1px solid var(--line)}
-.hero .facts div{display:flex;flex-direction:column;gap:2px}
-.hero .facts b{font-family:var(--display);font-size:1.6rem;font-weight:500}
-.mirror{position:relative;aspect-ratio:4/5.4;max-width:100%;width:100%;border-radius:999px 999px 18px 18px;overflow:hidden;background:linear-gradient(180deg,var(--surface),var(--bg));border:1px solid var(--line)}
-.mirror canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-.mirror .tag{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:8px 16px;white-space:nowrap;font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;color:var(--muted)}
-@media (max-width:860px){
-  .hero .wrap{grid-template-columns:1fr}
-  .mirror{aspect-ratio:auto;height:340px;border-radius:200px 200px 18px 18px}
+.hero{padding-top:0;padding-bottom:clamp(56px,7vw,96px);overflow:hidden}
+.curtain{position:relative;width:100%;height:270px;touch-action:pan-y;cursor:grab}
+.curtain canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.tag{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);white-space:nowrap;padding:8px 16px;border-radius:999px;background:var(--card);border:1px solid var(--line);font:400 .7rem var(--mono);letter-spacing:.08em;color:var(--mut);pointer-events:none}
+.hero-in{padding-top:28px}
+.hero h1{font-size:clamp(3.1rem,8.2vw,7.4rem);line-height:.92;margin-top:18px}
+.hero h1 em{font-style:italic;color:var(--acc)}
+.lede{margin-top:28px;max-width:33rem;font-size:1.08rem;color:var(--mut)}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.facts{display:flex;flex-wrap:wrap;gap:14px 40px;margin-top:44px;padding-top:22px;border-top:1px solid var(--line);max-width:36rem}
+.facts div{display:flex;flex-direction:column;gap:2px}
+.facts b{font:400 2.2rem/1 var(--display)}
+@media (min-width:900px){
+  .hero{min-height:min(100vh,860px);display:flex;align-items:center}
+  .hero > .wrap{width:100%}
+  .curtain{position:absolute;top:0;right:0;width:45%;height:100%}
+  .tag{bottom:36px}
+  .hero-in{padding-top:120px;max-width:56%;margin:0}
 }
-
-/* sections */
-section.block{padding-block:clamp(56px,8vw,110px)}
-.head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:24px 48px;align-items:end;margin-bottom:clamp(32px,5vw,56px)}
-.head h2{font-size:var(--s3)}
-.head p{color:var(--muted);max-width:36rem}
-@media (max-width:760px){.head{grid-template-columns:1fr}}
-.rule{border:0;border-top:1px solid var(--line);margin:0}
-
-/* manifesto */
-.manifesto{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
-.manifesto article{padding:8px 28px 8px 0;display:flex;flex-direction:column;gap:12px}
-.manifesto article + article{padding-left:28px;border-left:1px solid var(--line)}
-.manifesto h3{font-size:var(--s2)}
-.manifesto p{color:var(--muted)}
-@media (max-width:820px){
-  .manifesto{grid-template-columns:1fr;gap:28px}
-  .manifesto article,.manifesto article + article{padding:0;border-left:0}
-  .manifesto article + article{padding-top:28px;border-top:1px solid var(--line)}
+@media (prefers-reduced-motion:no-preference){
+  .hero-in > *{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+  .hero-in > :nth-child(2){animation-delay:.08s}
+  .hero-in > :nth-child(3){animation-delay:.16s}
+  .hero-in > :nth-child(4){animation-delay:.24s}
+  .hero-in > :nth-child(5){animation-delay:.32s}
+  @keyframes rise{from{opacity:0;transform:translateY(18px)}}
 }
-.quote{font-family:var(--display);font-style:italic;font-size:clamp(1.7rem,3.6vw,2.8rem);line-height:1.2;max-width:22ch;margin:0 0 clamp(36px,5vw,60px)}
-.quote span{color:var(--gold-3)}
-
-/* methods */
-.methods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
-.method{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:clamp(22px,3vw,36px);display:flex;flex-direction:column;gap:18px;min-width:0}
-.method h3{font-size:var(--s2)}
-.method .size{display:flex;align-items:center;gap:14px}
-.method svg{flex:none}
-.method dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px 18px;margin:0;font-size:.95rem}
-.method dt{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:3px}
-.method dd{margin:0}
-.note{margin-top:16px;font-size:var(--s-1);color:var(--muted)}
-@media (max-width:760px){.methods{grid-template-columns:1fr}.method dl{grid-template-columns:1fr;gap:2px}.method dd{margin-bottom:10px}}
-
-/* hair */
-.hair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:start}
-.compare{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--surface)}
-.compare .row{display:grid;grid-template-columns:1.1fr 1fr 1fr;border-top:1px solid var(--line)}
-.compare .row:first-child{border-top:0}
-.compare .row > *{padding:14px 16px;font-size:.92rem;min-width:0}
-.compare .row > * + *{border-left:1px solid var(--line)}
-.compare .h{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.compare .yes{color:var(--ink)}
-.compare .no{color:var(--muted)}
-.compare .us{background:color-mix(in srgb,var(--gold-2) 22%,transparent)}
-.hair .copy{display:flex;flex-direction:column;gap:18px}
-.hair .copy p{color:var(--muted)}
-.hair .copy strong{color:var(--ink);font-weight:600}
-@media (max-width:860px){.hair{grid-template-columns:1fr}}
-.scroll-x{overflow-x:auto}
-.compare-inner{min-width:420px}
-
-/* process */
-.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;counter-reset:s}
-.steps li{counter-increment:s;display:flex;flex-direction:column;gap:10px;padding-top:18px;border-top:2px solid var(--ink)}
-.steps li::before{content:counter(s,decimal-leading-zero);font-family:var(--mono);font-size:.78rem;color:var(--gold-3);letter-spacing:.1em}
-.steps h3{font-size:1.45rem}
-.steps p{color:var(--muted);font-size:.95rem}
-@media (max-width:900px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:520px){.steps{grid-template-columns:1fr}}
-
-/* shades */
-.shades{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
-.shade{display:flex;flex-direction:column;gap:10px;min-width:0}
-.shade .lock{height:190px;border-radius:999px 999px 10px 10px;border:1px solid var(--line);position:relative;overflow:hidden}
-.shade .lock::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 3px,rgba(255,255,255,.12) 3px 4px,transparent 4px 7px,rgba(0,0,0,.08) 7px 8px)}
-.shade span{font-size:.88rem}
-.shade small{font-family:var(--mono);font-size:.7rem;color:var(--muted);letter-spacing:.06em}
-@media (max-width:820px){.shades{grid-template-columns:repeat(3,minmax(0,1fr))}.shade .lock{height:130px}}
 
 /* portfolio */
-.portfolio{padding-top:clamp(24px,4vw,48px)}
-.works{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(8px,1.4vw,16px);grid-auto-flow:dense}
-.work{position:relative;display:block;padding:0;border:0;margin:0;background:var(--surface);border-radius:14px;overflow:hidden;cursor:zoom-in;aspect-ratio:3/4;max-width:100%;color:#fff;text-align:left;font:inherit}
-.work.feature{grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
-.work img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
-.work::after{content:"";position:absolute;inset:auto 0 0;height:45%;background:linear-gradient(to top,rgba(18,12,10,.72),rgba(18,12,10,0));pointer-events:none}
-.work .cap{position:absolute;left:14px;right:14px;bottom:12px;z-index:1;display:flex;flex-direction:column;gap:2px;transition:transform .5s ease}
-.work .cap b{font-family:var(--display);font-weight:500;font-size:clamp(1rem,1.8vw,1.35rem);line-height:1.1}
-.work.feature .cap b{font-size:clamp(1.3rem,3vw,2.2rem)}
-.work .cap small{font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
-.work:hover img{transform:scale(1.05)}
-.work:hover .cap{transform:translateY(-4px)}
-.ig-more{display:flex;justify-content:center;margin-top:28px}
-@media (max-width:640px){
-  .works{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .work.feature{grid-row:auto;aspect-ratio:3/4}
-  .work .cap small{display:none}
-}
-/* comb reveal: strands of the photo grow in as it scrolls into view */
-@property --comb{syntax:"<percentage>";inherits:false;initial-value:100%}
-@keyframes comb{
-  from{--comb:8%;transform:translateY(28px) scale(1.08)}
-  to{--comb:100%;transform:none}
-}
-@supports (animation-timeline: view()){
-  @media (prefers-reduced-motion: no-preference){
-    .work img{
-      -webkit-mask-image:linear-gradient(90deg,#000 var(--comb),transparent var(--comb));
-      mask-image:linear-gradient(90deg,#000 var(--comb),transparent var(--comb));
-      -webkit-mask-size:5.5% 100%;mask-size:5.5% 100%;
-      animation:comb linear both;animation-timeline:view();animation-range:entry 0% entry 80%;
-    }
-    .work:nth-child(3n+2) img{animation-range:entry 8% entry 90%}
-    .work:nth-child(3n) img{animation-range:entry 16% entry 100%}
-    .work:hover img{transform:scale(1.05)}
+.works{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,1.6vw,20px)}
+.work{display:flex;flex-direction:column;gap:12px;padding:0;margin:0;border:0;background:none;color:inherit;font:inherit;text-align:left;cursor:zoom-in;min-width:0}
+.work:nth-child(even){margin-top:clamp(20px,3.4vw,44px)}
+.ph{display:block;aspect-ratio:3/4;max-width:100%;border-radius:14px;overflow:hidden;background:var(--card)}
+.ph img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.work:hover .ph img{transform:scale(1.05)}
+.cap{display:flex;flex-direction:column;gap:2px}
+.cap b{font:500 clamp(1.15rem,1.9vw,1.5rem)/1.1 var(--display)}
+.cap small{font:400 .66rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+.more{display:flex;justify-content:center;margin-top:clamp(28px,4vw,44px)}
+@media (max-width:760px){.works{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* parting reveal: each photo opens from its centre line, like hair being parted */
+@keyframes part{from{clip-path:inset(0 44% 0 44% round 14px)}to{clip-path:inset(0 0 0 0 round 14px)}}
+@supports (animation-timeline:view()){
+  @media (prefers-reduced-motion:no-preference){
+    .ph{animation:part linear both;animation-timeline:view();animation-range:entry 0% entry 85%}
   }
 }
 /* lightbox */
 .lightbox{border:0;padding:0;background:transparent;max-width:min(92vw,720px);max-height:92vh;overflow:visible;color:#fff}
-.lightbox::backdrop{background:rgba(14,10,10,.86);backdrop-filter:blur(6px)}
+.lightbox::backdrop{background:rgba(14,10,10,.88);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 .lightbox figure{margin:0;display:flex;flex-direction:column;gap:12px}
 .lightbox img{display:block;max-height:80vh;width:auto;max-width:100%;margin:0 auto;border-radius:12px}
 .lightbox[open] img{animation:lbIn .45s cubic-bezier(.2,.7,.2,1)}
-@keyframes lbIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+@keyframes lbIn{from{opacity:0;transform:scale(.96)}}
 .lightbox figcaption{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;justify-content:center}
-.lightbox figcaption b{font-family:var(--display);font-weight:500;font-size:1.3rem}
-.lightbox figcaption span{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;opacity:.8}
+.lightbox figcaption b{font:500 1.4rem var(--display)}
+.lightbox figcaption span{font:400 .72rem var(--mono);letter-spacing:.08em;text-transform:uppercase;opacity:.8}
 .lb-btn{position:fixed;width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(20,14,14,.5);color:#fff;font-size:1.2rem;cursor:pointer;display:grid;place-items:center}
 .lb-btn:hover{background:rgba(255,255,255,.15)}
 .lb-close{top:calc(16px + env(safe-area-inset-top,0px));right:calc(16px + env(safe-area-inset-right,0px))}
@@ -218,32 +145,76 @@ section.block{padding-block:clamp(56px,8vw,110px)}
 .lb-next{right:calc(16px + env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%)}
 @media (max-width:640px){.lb-prev,.lb-next{top:auto;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:none}}
 
-/* price calculator */
-.calc{border-top:1px solid var(--line);padding-top:16px;display:flex;flex-direction:column;gap:10px}
-.calc output{font-family:var(--mono);color:var(--ink)}
-.calc input[type=range]{width:100%;accent-color:var(--rose)}
+/* manifesto */
+.quote{font:italic 300 clamp(2rem,4.6vw,3.7rem)/1.08 var(--display);max-width:21ch;margin:0 0 clamp(36px,5vw,64px)}
+.quote span{color:var(--acc);font-weight:500}
+.tri{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.tri article{display:flex;flex-direction:column;gap:12px;padding-right:28px}
+.tri article + article{padding-left:28px;border-left:1px solid var(--line)}
+.tri h3{font-size:1.9rem;font-weight:400}
+.tri p:last-child{color:var(--mut)}
+@media (max-width:820px){.tri{grid-template-columns:1fr;gap:26px}.tri article,.tri article + article{padding:0;border-left:0}.tri article + article{padding-top:26px;border-top:1px solid var(--line)}}
+
+/* methods */
+.methods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:start}
+.method{display:flex;flex-direction:column;gap:18px;min-width:0;padding:clamp(22px,3vw,38px);border-radius:22px;background:var(--card);border:1px solid var(--line)}
+.method h3{font-size:2.3rem;font-weight:400}
+.method > p{color:var(--mut)}
+.size{display:flex;align-items:center;gap:14px}
+.size svg{flex:none}
+.method dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px 18px;margin:0;font-size:.95rem}
+.method dt{font:400 .7rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mut);padding-top:4px}
+.method dd{margin:0}
+.calc{display:flex;flex-direction:column;gap:10px;padding-top:16px;border-top:1px solid var(--line)}
+.calc output{color:var(--ink)}
+input[type=range]{width:100%;accent-color:var(--acc)}
 .calc-out{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
-.calc-out span{font-family:var(--display);font-size:2rem;line-height:1;font-variant-numeric:tabular-nums}
-.calc-out small{color:var(--muted);font-size:.85rem}
+.calc-out span{font:400 2.4rem/1 var(--display);font-variant-numeric:tabular-nums}
+.calc-out small{color:var(--mut);font-size:.85rem}
+.note{margin-top:16px;font-size:.82rem;color:var(--mut)}
+@media (max-width:760px){.methods{grid-template-columns:1fr}.method dl{grid-template-columns:1fr;gap:2px}.method dd{margin-bottom:10px}}
 
-.mirror{touch-action:pan-y;cursor:grab}
+/* hair */
+.hair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:start}
+.copy{display:flex;flex-direction:column;gap:18px}
+.copy > p:not(.label){color:var(--mut)}
+.copy strong{color:var(--ink);font-weight:600}
+.compare{border:1px solid var(--line);border-radius:20px;background:var(--card);overflow-x:auto}
+.compare-in{min-width:420px}
+.row{display:grid;grid-template-columns:1.1fr 1fr 1fr;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.row > *{padding:14px 16px;font-size:.92rem;min-width:0}
+.row > * + *{border-left:1px solid var(--line)}
+.row .h{font:400 .68rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.row .no{color:var(--mut)}
+.row .us{background:color-mix(in srgb,var(--acc) 16%,transparent)}
+@media (max-width:860px){.hair{grid-template-columns:1fr}}
 
-/* skup */
+/* steps */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;counter-reset:s}
+.steps li{counter-increment:s;display:flex;flex-direction:column;gap:10px;padding-top:18px;border-top:1px solid var(--ink)}
+.steps li::before{content:counter(s,decimal-leading-zero);font:400 .78rem var(--mono);letter-spacing:.1em;color:var(--acc)}
+.steps h3{font-size:1.7rem;font-weight:400}
+.steps p{color:var(--mut);font-size:.95rem}
+@media (max-width:900px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}}
+
+/* hair buying */
 .buy{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,3vw,40px)}
-.price{background:var(--ink);color:var(--bg);border-radius:18px;padding:clamp(22px,3vw,32px);display:flex;flex-direction:column;gap:12px}
-.price .label{color:color-mix(in srgb,var(--bg) 65%,transparent)}
-.price .big{font-family:var(--display);font-size:clamp(2.4rem,5vw,3.4rem);line-height:1}
-.price .big small{font-family:var(--mono);font-size:.85rem;letter-spacing:.06em}
-.price .muted{color:color-mix(in srgb,var(--bg) 72%,transparent);font-size:.92rem}
+.price{display:flex;flex-direction:column;gap:12px;padding:clamp(22px,3vw,34px);border-radius:22px;background:var(--ink);color:var(--bg)}
+.price .label{color:color-mix(in srgb,var(--bg) 70%,transparent)}
+.price .big{font:400 clamp(2.8rem,5.6vw,4rem)/1 var(--display)}
+.price .big small{font:400 .85rem var(--mono);letter-spacing:.06em}
+.price .mu{color:color-mix(in srgb,var(--bg) 78%,transparent);font-size:.92rem}
 .ticks{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
 .ticks li{display:grid;grid-template-columns:20px minmax(0,1fr);gap:8px;padding-bottom:10px;border-bottom:1px solid var(--line)}
-.ticks li::before{content:"✓";font-family:var(--mono);color:var(--gold-3)}
-.ticks.no li::before{content:"×";color:var(--rose)}
-.ticks.no li{color:var(--muted)}
-.buy-cta{margin-top:clamp(24px,4vw,40px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
-.buy-cta > p{max-width:46ch;color:var(--muted)}
-.buy-cta .actions{display:flex;flex-wrap:wrap;gap:10px}
-.buy-cta .status{flex-basis:100%}
+.ticks li::before{content:"✓";font-family:var(--mono);color:var(--acc)}
+.ticks.no li::before{content:"×"}
+.ticks.no li{color:var(--mut)}
+.buy-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin-top:clamp(24px,4vw,40px)}
+.buy-cta > p:first-child{max-width:46ch;color:var(--mut)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.status{flex-basis:100%;font-size:.85rem;color:var(--mut);min-height:1.3em}
 @media (max-width:900px){.buy{grid-template-columns:1fr 1fr}.price{grid-column:1/-1}}
 @media (max-width:560px){.buy{grid-template-columns:1fr}}
 
@@ -253,79 +224,116 @@ section.block{padding-block:clamp(56px,8vw,110px)}
 .faq details:last-child{border-bottom:1px solid var(--line)}
 .faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;font-weight:600;font-size:1.02rem}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+";font-family:var(--mono);color:var(--gold-3);font-weight:400;transition:transform .2s}
+.faq summary::after{content:"+";font-family:var(--mono);font-weight:400;color:var(--acc);transition:transform .2s}
 .faq details[open] summary::after{transform:rotate(45deg)}
-.faq details p{margin-top:12px;color:var(--muted);max-width:60ch}
+.faq details p{margin-top:12px;color:var(--mut);max-width:60ch}
 @media (max-width:820px){.faq{grid-template-columns:1fr}}
 
-/* contact */
-.contact{background:var(--surface);border-block:1px solid var(--line)}
-.builder{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px)}
+/* configurator */
+.cfg{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,3vw,40px);align-items:start}
+.figp{border-radius:22px;background:#E6DDCC;color:#241A15;padding:14px 10px 12px;display:flex;flex-direction:column;gap:8px}
+.figp svg{display:block;width:100%;height:auto}
+.figp .fnote{font-size:.72rem;line-height:1.4;color:#6B5D52;padding-inline:8px}
+.figp .mannequin{fill:#CDBFA8}
+.figp .tick{stroke:#241A15;stroke-opacity:.5;stroke-width:1}
+.figp text{font:400 13px var(--mono);fill:#6B5D52}
+.figp text.on{fill:#241A15;font-weight:500}
+.figp .lmline{stroke:#241A15;stroke-opacity:.35;stroke-dasharray:2 3}
+.figp #mark{stroke:#241A15;stroke-width:1.2;stroke-dasharray:3 3}
+.figp #hair{stroke:rgba(36,26,21,.4);stroke-width:1}
 form{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .field{display:flex;flex-direction:column;gap:6px;min-width:0}
 .field.full{grid-column:1/-1}
-.field label,.field legend{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:0}
+.field label,.field legend{font:400 .7rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mut);padding:0}
+.field output{color:var(--ink)}
 fieldset{border:0;margin:0;padding:0;min-width:0}
-input[type=text],select,textarea{width:100%;font:inherit;font-size:.95rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:11px 12px}
+input[type=text],select,textarea{width:100%;font:inherit;font-size:.95rem;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 12px}
 textarea{min-height:84px;resize:vertical}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
 .chips label{position:relative}
 .chips input{position:absolute;opacity:0;pointer-events:none}
-.chips span{display:inline-block;padding:8px 14px;border:1px solid var(--line);border-radius:999px;font-size:.88rem;cursor:pointer;font-family:var(--body);letter-spacing:0;text-transform:none;color:var(--ink)}
+.chips span{display:inline-block;padding:8px 14px;border:1px solid var(--line);border-radius:999px;font:400 .88rem var(--body);letter-spacing:0;text-transform:none;color:var(--ink);cursor:pointer}
 .chips input:checked + span{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.chips input:focus-visible + span{outline:2px solid var(--gold);outline-offset:2px}
-.preview{display:flex;flex-direction:column;gap:14px}
-.bubble{background:var(--bg);border:1px solid var(--line);border-radius:18px 18px 18px 4px;padding:18px 20px;white-space:pre-wrap;font-size:.95rem;min-height:200px;user-select:text}
-.preview .actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-.status{font-size:.85rem;color:var(--muted);min-height:1.3em}
-@media (max-width:860px){.builder{grid-template-columns:1fr}}
-@media (max-width:480px){form{grid-template-columns:1fr}}
+.chips input:focus-visible + span{outline:2px solid var(--acc);outline-offset:2px}
+.shades{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.shades label{position:relative}
+.shades input{position:absolute;opacity:0;pointer-events:none}
+.shades i{display:block;width:38px;height:38px;border-radius:50%;background:var(--g);border:2px solid var(--bg);box-shadow:0 0 0 1px var(--line);cursor:pointer;transition:transform .2s}
+.shades input:checked + i{box-shadow:0 0 0 2px var(--acc);transform:scale(1.08)}
+.shades input:focus-visible + i{outline:2px solid var(--acc);outline-offset:4px}
+.hint{font-size:.8rem;color:var(--mut)}
+.preview{display:flex;flex-direction:column;gap:14px;min-width:0}
+.bubble{background:var(--card);border:1px solid var(--line);border-radius:20px 20px 20px 4px;padding:18px 20px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:.95rem;min-height:220px;user-select:text}
+@media (max-width:1040px){.cfg{grid-template-columns:minmax(0,300px) minmax(0,1fr)}.preview{grid-column:1/-1}}
+@media (max-width:700px){footer{padding-bottom:70px}.cfg{grid-template-columns:1fr}.figp{max-width:340px;width:100%;margin-inline:auto}}
+@media (max-width:440px){form{grid-template-columns:1fr}}
 
-footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;padding-block:36px;color:var(--muted);font-size:.88rem}
+footer{margin-top:clamp(64px,9vw,110px);padding-top:28px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;color:var(--mut);font-size:.88rem}
 footer .logo{color:var(--ink)}
+
+/* mobile dock */
+.dock{display:none}
+@media (max-width:700px){
+  .dock{display:inline-flex;position:fixed;z-index:18;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));padding:13px 24px;border-radius:999px;background:#E4C590;color:#191312;font:600 .92rem var(--body);text-decoration:none;white-space:nowrap;box-shadow:0 10px 30px rgba(25,19,18,.35);transition:opacity .3s,transform .3s}
+  body[data-shade="1"] .dock,body[data-shade="6"] .dock{opacity:0;pointer-events:none;transform:translate(-50%,20px)}
+}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.35s}
 </style>
+<meta name="theme-color" content="#EFE9DD">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Daria Extensions · Poznań">
 <meta property="og:description" content="Przedłużanie i zagęszczanie włosów minikapsułkami i biotaśmami. Niewidoczne łączenia, włosy premium i dziewicze.">
 <meta property="og:image" content="https://sapunovolegex-dotcom.github.io/dariaextensions/img/p02.jpg">
 <meta property="og:url" content="https://sapunovolegex-dotcom.github.io/dariaextensions/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%236A2F3B'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23F0DDBA'%3ED%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23191312'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23E4C590'%3ED%3C/text%3E%3C/svg%3E">
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
 
 <header class="top">
-  <div class="wrap">
-    <a class="logo" href="#start">Daria <i>Extensions</i></a>
+  <div class="pill">
+    <a class="logo" href="#ch1">Daria <i>Extensions</i></a>
     <nav class="nav" aria-label="Menu">
       <a href="#portfolio" data-t="nav.pf">Portfolio</a>
       <a href="#metody" data-t="nav.me">Metody</a>
       <a href="#wlosy" data-t="nav.hair">Włosy</a>
-      <a href="#wizyta" data-t="nav.visit">Wizyta</a>
       <a href="#skup" data-t="nav.buy">Skup włosów</a>
       <a href="#faq" data-t="nav.faq">Pytania</a>
     </nav>
-    <div class="tools">
-      <div class="lang" role="group" aria-label="Język" data-ta="aria-label:lang.aria">
-        <button type="button" data-lang="pl" lang="pl" aria-pressed="true">PL</button>
-        <button type="button" data-lang="uk" lang="uk" aria-pressed="false">UA</button>
-        <button type="button" data-lang="en" lang="en" aria-pressed="false">EN</button>
-      </div>
-      <a class="btn btn-main nav-cta" href="#kontakt"><span class="long" data-t="cta.long">Umów konsultację</span><span class="short" data-t="cta.short">Umów się</span></a>
+    <div class="lang" role="group" aria-label="Język" data-ta="aria-label:lang.aria">
+      <button type="button" data-lang="pl" lang="pl" aria-pressed="true">PL</button>
+      <button type="button" data-lang="uk" lang="uk" aria-pressed="false">UA</button>
+      <button type="button" data-lang="en" lang="en" aria-pressed="false">EN</button>
     </div>
+    <a class="cta" href="#kontakt" data-t="cta.short">Umów się</a>
   </div>
 </header>
 
-<main id="start">
-  <section class="hero">
+<nav class="idx" aria-label="Sekcje strony" data-ta="aria-label:idx.aria">
+  <a href="#ch1" data-shade="1" style="--c:var(--s1);color:#241A15"><span>10/01</span></a>
+  <a href="#ch2" data-shade="2" style="--c:var(--s2);color:#241A15"><span>9/3</span></a>
+  <a href="#ch3" data-shade="3" style="--c:var(--s3);color:#21160F"><span>7/0</span></a>
+  <a href="#ch4" data-shade="4" style="--c:var(--s4);color:#FFF6E8"><span>6/34</span></a>
+  <a href="#ch5" data-shade="5" style="--c:var(--s5);color:#F5EADA"><span>4/0</span></a>
+  <a href="#ch6" data-shade="6" style="--c:var(--s6);color:#F2E8DA"><span>1/0</span></a>
+</nav>
+
+<a class="dock" href="#kontakt" data-t="hero.cta1">Zapytaj o termin</a>
+
+<main>
+  <section class="ch c1 hero" id="ch1" data-shade="1">
+    <div class="curtain" id="mirror" aria-hidden="true">
+      <canvas id="strands"></canvas>
+      <div class="tag" data-t="tag">Dotknij i przeczesz ✦</div>
+    </div>
     <div class="wrap">
-      <div>
+      <div class="hero-in">
         <p class="label" data-t="hero.eye">Poznań · Przedłużanie i zagęszczanie włosów</p>
-        <h1 style="margin-top:18px" data-t="hero.h1">Niewidoczne łączenia. <em>Naturalny</em> efekt.</h1>
+        <h1 data-t="hero.h1">Niewidoczne łączenia. <em>Naturalny</em> efekt.</h1>
         <p class="lede" data-t="hero.lede">Nie „doczepiam” włosów. Przedłużam je albo delikatnie zagęszczam minikapsułkami i biotaśmami, tak żeby nikt nie zgadł, gdzie kończą się Twoje włosy, a zaczynają nowe. Pracuję wyłącznie na włosach premium i dziewiczych.</p>
-        <div class="cta">
+        <div class="ctas">
           <a class="btn btn-main" href="#kontakt" data-t="hero.cta1">Zapytaj o termin</a>
-          <a class="btn btn-ghost" href="https://www.instagram.com/dariaextensions/" target="_blank" rel="noopener" data-t="hero.cta2">Zobacz metamorfozy ↗</a>
+          <a class="btn btn-ghost" href="#portfolio" data-t="hero.cta2">Zobacz metamorfozy ↗</a>
         </div>
         <div class="facts">
           <div><b>170+</b><span class="label" data-t="fact1">prac na Instagramie</span></div>
@@ -333,33 +341,30 @@ footer .logo{color:var(--ink)}
           <div><b>0 %</b><span class="label" data-t="fact3">bioproteiny</span></div>
         </div>
       </div>
-      <div class="mirror" id="mirror" aria-hidden="true">
-        <canvas id="strands"></canvas>
-        <div class="tag" data-t="tag">Dotknij i przeczesz ✦</div>
-      </div>
     </div>
   </section>
 
-  <section class="block portfolio" id="portfolio">
-    <div class="wrap">
+  <section class="ch c2" id="ch2" data-shade="2">
+    <div class="wrap sec" id="portfolio">
+      <p class="swatch"><i></i>9 / 3 · <span data-t="sh2">Beżowy blond</span></p>
       <div class="head">
         <div>
           <p class="label" data-t="pf.label">Portfolio</p>
-          <h2 style="margin-top:10px" data-t="pf.h2">Metamorfozy z mojego studia</h2>
+          <h2 data-t="pf.h2">Metamorfozy z mojego studia</h2>
         </div>
         <p data-t="pf.p">Prawdziwe klientki, prawdziwe światło, bez filtrów. Kliknij zdjęcie, żeby je powiększyć. Więcej prac i filmy „przed i po” znajdziesz na Instagramie.</p>
       </div>
       <div class="works">
-        <button class="work" type="button"><img src="img/p02.jpg" alt="Długie fale w odcieniu miodowego blondu" data-ta="alt:w1a" width="900" height="1200" loading="lazy" decoding="async"><span class="cap"><b>Angel</b><small data-t="w1s">Miodowy blond, fale</small></span></button>
-        <button class="work" type="button"><img src="img/p03.jpg" alt="Czarne, proste włosy zagęszczone kapsułkami" data-ta="alt:w2a" width="900" height="1200" loading="lazy" decoding="async"><span class="cap"><b data-t="w2t">50 kapsułek</b><small data-t="w2s">Delikatne zagęszczenie</small></span></button>
-        <button class="work" type="button"><img src="img/p08.jpg" alt="Długie platynowe włosy" data-ta="alt:w3a" width="900" height="1200" loading="lazy" decoding="async"><span class="cap"><b data-t="w3t">Platyna</b><small data-t="w3s">Do 50 g włosów</small></span></button>
-        <button class="work" type="button"><img src="img/p04.jpg" alt="Kręcone włosy w popielatym blondzie z większą objętością" data-ta="alt:w4a" width="900" height="1200" loading="lazy" decoding="async"><span class="cap"><b data-t="w4t">Objętość w lokach</b><small data-t="w4s">Subtelne zagęszczenie</small></span></button>
-        <button class="work" type="button"><img src="img/p05.jpg" alt="Proste kasztanowe włosy z gęstymi końcami" data-ta="alt:w5a" width="900" height="1200" loading="lazy" decoding="async"><span class="cap"><b data-t="w5t">Naturalna długość</b><small data-t="w5s">Gęste końce</small></span></button>
-        <button class="work" type="button"><img src="img/p10.jpg" alt="Popielaty blond z ciemniejszą nasadą" data-ta="alt:w6a" width="900" height="1200" loading="lazy" decoding="async"><span class="cap"><b data-t="w6t">Moja dusza</b><small data-t="w6s">Popielaty blond</small></span></button>
-        <button class="work" type="button"><img src="img/p11.jpg" alt="Jasne ombre na prostych włosach" data-ta="alt:w7a" width="900" height="1200" loading="lazy" decoding="async"><span class="cap"><b data-t="w7t">Jasne ombre</b><small data-t="w7s">Płynne przejście koloru</small></span></button>
-        <button class="work" type="button"><img src="img/p07.jpg" alt="Miedziane włosy do łopatek" data-ta="alt:w8a" width="900" height="1200" loading="lazy" decoding="async"><span class="cap"><b data-t="w8t">Miedź</b><small data-t="w8s">Ciepły, rudy odcień</small></span></button>
+        <button class="work" type="button"><span class="ph"><img src="img/p02.jpg" alt="Długie fale w odcieniu miodowego blondu" data-ta="alt:w1a" width="900" height="1200" decoding="async"></span><span class="cap"><b>Angel</b><small data-t="w1s">Miodowy blond, fale</small></span></button>
+        <button class="work" type="button"><span class="ph"><img src="img/p03.jpg" alt="Czarne, proste włosy zagęszczone kapsułkami" data-ta="alt:w2a" width="900" height="1200" decoding="async"></span><span class="cap"><b data-t="w2t">50 kapsułek</b><small data-t="w2s">Delikatne zagęszczenie</small></span></button>
+        <button class="work" type="button"><span class="ph"><img src="img/p08.jpg" alt="Długie platynowe włosy" data-ta="alt:w3a" width="900" height="1200" decoding="async"></span><span class="cap"><b data-t="w3t">Platyna</b><small data-t="w3s">Do 50 g włosów</small></span></button>
+        <button class="work" type="button"><span class="ph"><img src="img/p04.jpg" alt="Kręcone włosy w popielatym blondzie z większą objętością" data-ta="alt:w4a" width="900" height="1200" decoding="async"></span><span class="cap"><b data-t="w4t">Objętość w lokach</b><small data-t="w4s">Subtelne zagęszczenie</small></span></button>
+        <button class="work" type="button"><span class="ph"><img src="img/p05.jpg" alt="Proste kasztanowe włosy z gęstymi końcami" data-ta="alt:w5a" width="900" height="1200" loading="lazy" decoding="async"></span><span class="cap"><b data-t="w5t">Naturalna długość</b><small data-t="w5s">Gęste końce</small></span></button>
+        <button class="work" type="button"><span class="ph"><img src="img/p10.jpg" alt="Popielaty blond z ciemniejszą nasadą" data-ta="alt:w6a" width="900" height="1200" loading="lazy" decoding="async"></span><span class="cap"><b data-t="w6t">Moja dusza</b><small data-t="w6s">Popielaty blond</small></span></button>
+        <button class="work" type="button"><span class="ph"><img src="img/p11.jpg" alt="Jasne ombre na prostych włosach" data-ta="alt:w7a" width="900" height="1200" loading="lazy" decoding="async"></span><span class="cap"><b data-t="w7t">Jasne ombre</b><small data-t="w7s">Płynne przejście koloru</small></span></button>
+        <button class="work" type="button"><span class="ph"><img src="img/p07.jpg" alt="Miedziane włosy do łopatek" data-ta="alt:w8a" width="900" height="1200" loading="lazy" decoding="async"></span><span class="cap"><b data-t="w8t">Miedź</b><small data-t="w8s">Ciepły, rudy odcień</small></span></button>
       </div>
-      <div class="ig-more">
+      <div class="more">
         <a class="btn btn-ghost" href="https://www.instagram.com/dariaextensions/" target="_blank" rel="noopener" data-t="pf.more">Zobacz 170+ prac na Instagramie ↗</a>
       </div>
     </div>
@@ -368,19 +373,18 @@ footer .logo{color:var(--ink)}
   <dialog class="lightbox" id="lb" aria-label="Powiększone zdjęcie" data-ta="aria-label:lb.aria">
     <figure>
       <img id="lb-img" src="img/p02.jpg" alt="">
-      <figcaption><b id="lb-t"></b><span id="lb-s"></span><span class="count" id="lb-n"></span></figcaption>
+      <figcaption><b id="lb-t"></b><span id="lb-s"></span><span id="lb-n"></span></figcaption>
     </figure>
     <button class="lb-btn lb-close" type="button" id="lb-close" aria-label="Zamknij" data-ta="aria-label:lb.close">×</button>
     <button class="lb-btn lb-prev" type="button" id="lb-prev" aria-label="Poprzednie zdjęcie" data-ta="aria-label:lb.prev">←</button>
     <button class="lb-btn lb-next" type="button" id="lb-next" aria-label="Następne zdjęcie" data-ta="aria-label:lb.next">→</button>
   </dialog>
 
-  <hr class="rule">
-
-  <section class="block">
-    <div class="wrap">
+  <section class="ch c3" id="ch3" data-shade="3">
+    <div class="wrap sec">
+      <p class="swatch"><i></i>7 / 0 · <span data-t="sh3">Ciemny blond</span></p>
       <p class="quote" data-t="quote">Czasem nie chodzi o to, by włosy były dłuższe. Chodzi o <span>gęste końce i absolutną naturalność.</span></p>
-      <div class="manifesto">
+      <div class="tri">
         <article>
           <p class="label" data-t="m1l">Łączenia</p>
           <h3 data-t="m1h">Płasko, cienko, blisko skóry</h3>
@@ -398,14 +402,12 @@ footer .logo{color:var(--ink)}
         </article>
       </div>
     </div>
-  </section>
 
-  <section class="block" id="metody" style="padding-top:0">
-    <div class="wrap">
+    <div class="wrap sec" id="metody">
       <div class="head">
         <div>
           <p class="label" data-t="me.label">Metody</p>
-          <h2 style="margin-top:10px" data-t="me.h2">Dwie techniki, jedna zasada</h2>
+          <h2 data-t="me.h2">Dwie techniki, jedna zasada</h2>
         </div>
         <p data-t="me.p">Metodę wybieramy razem na konsultacji. Decyduje grubość i kondycja Twoich włosów, fryzury, które nosisz na co dzień, oraz to, jak często możesz przychodzić na korektę.</p>
       </div>
@@ -413,11 +415,9 @@ footer .logo{color:var(--ink)}
         <article class="method">
           <div class="size">
             <svg width="70" height="34" viewBox="0 0 70 34" aria-hidden="true">
-              <path d="M2 17 C20 17 30 17 34 17" stroke="var(--gold)" stroke-width="2" fill="none"/>
-              <path d="M2 13 C20 14 30 15 34 16" stroke="var(--gold-2)" stroke-width="1.4" fill="none"/>
-              <path d="M2 21 C20 20 30 19 34 18" stroke="var(--gold-3)" stroke-width="1.4" fill="none"/>
-              <ellipse cx="40" cy="17" rx="7" ry="4.5" fill="var(--gold-2)" stroke="var(--gold-3)" stroke-width="1"/>
-              <path d="M47 17 C55 17 62 17 68 17" stroke="var(--muted)" stroke-width="1" fill="none" stroke-dasharray="2 3"/>
+              <path d="M2 17 C20 17 30 17 34 17 M2 13 C20 14 30 15 34 16 M2 21 C20 20 30 19 34 18" stroke="var(--acc)" stroke-width="1.5" fill="none"/>
+              <ellipse cx="40" cy="17" rx="7" ry="4.5" fill="var(--bg)" stroke="var(--ink)" stroke-width="1"/>
+              <path d="M47 17 H68" stroke="var(--mut)" stroke-width="1" fill="none" stroke-dasharray="2 3"/>
             </svg>
             <span class="label" data-t="mk.size">kapsułka ≈ ziarenko ryżu</span>
           </div>
@@ -439,9 +439,9 @@ footer .logo{color:var(--ink)}
         <article class="method">
           <div class="size">
             <svg width="70" height="34" viewBox="0 0 70 34" aria-hidden="true">
-              <rect x="22" y="9" width="40" height="7" rx="2" fill="var(--gold-2)" stroke="var(--gold-3)" stroke-width="1"/>
-              <path d="M24 16 L24 33 M30 16 L30 33 M36 16 L36 33 M42 16 L42 33 M48 16 L48 33 M54 16 L54 33 M60 16 L60 33" stroke="var(--gold)" stroke-width="1.2"/>
-              <path d="M4 12.5 L18 12.5" stroke="var(--muted)" stroke-width="1" stroke-dasharray="2 3"/>
+              <rect x="22" y="9" width="40" height="7" rx="2" fill="var(--bg)" stroke="var(--ink)" stroke-width="1"/>
+              <path d="M24 16 V33 M30 16 V33 M36 16 V33 M42 16 V33 M48 16 V33 M54 16 V33 M60 16 V33" stroke="var(--acc)" stroke-width="1.3"/>
+              <path d="M4 12.5 H18" stroke="var(--mut)" stroke-width="1" stroke-dasharray="2 3"/>
             </svg>
             <span class="label" data-t="bt.size">taśma płaska przy skórze</span>
           </div>
@@ -459,36 +459,35 @@ footer .logo{color:var(--ink)}
     </div>
   </section>
 
-  <section class="block" id="wlosy" style="padding-top:0">
-    <div class="wrap hair">
-      <div class="copy">
-        <p class="label" data-t="h.label">Włosy</p>
-        <h2 style="font-size:var(--s3)" data-t="h.h2">Premium i dziewicze. Żadnej bioproteiny.</h2>
-        <p data-t="h.p1"><strong>Włosy dziewicze</strong> nigdy nie były farbowane ani poddane chemicznej obróbce. Łuska jest ułożona w jednym kierunku, więc włosy się nie plączą i długo zachowują połysk.</p>
-        <p data-t="h.p2"><strong>Bioproteina</strong> to włókno sztuczne, które tylko udaje włosy. Matowieje, plącze się, nie znosi wysokiej temperatury i nie da się go przefarbować. Dlatego z nim nie pracuję.</p>
-        <p data-t="h.p3">Dobre włosy można po zdjęciu założyć ponownie przy korekcie. Płacisz za nie raz i nosisz długo.</p>
-      </div>
-      <div class="compare scroll-x" role="region" aria-label="Porównanie rodzajów włosów" data-ta="aria-label:cmp.aria" tabindex="0">
-        <div class="compare-inner">
-          <div class="row"><span class="h"></span><span class="h us" data-t="cmp.h1">Dziewicze / premium</span><span class="h" data-t="cmp.h2">Bioproteina</span></div>
-          <div class="row"><span data-t="cmp.r1">Farbowanie</span><span class="yes us" data-t="yes">Tak</span><span class="no" data-t="no">Nie</span></div>
-          <div class="row"><span data-t="cmp.r2">Lokówka, prostownica</span><span class="yes us" data-t="yes">Tak</span><span class="no" data-t="cmp.lim">Ograniczone</span></div>
-          <div class="row"><span data-t="cmp.r3">Wygląd w świetle</span><span class="yes us" data-t="cmp.shine">Naturalny połysk</span><span class="no" data-t="cmp.gloss">Sztuczny błysk</span></div>
-          <div class="row"><span data-t="cmp.r4">Plątanie</span><span class="yes us" data-t="cmp.min">Minimalne</span><span class="no" data-t="cmp.mats">Szybko się filcuje</span></div>
-          <div class="row"><span data-t="cmp.r5">Ponowne założenie</span><span class="yes us" data-t="cmp.reuse">Tak, przy korekcie</span><span class="no" data-t="cmp.usually">Zwykle nie</span></div>
+  <section class="ch c4" id="ch4" data-shade="4">
+    <div class="wrap sec" id="wlosy">
+      <p class="swatch"><i></i>6 / 34 · <span data-t="sh4">Karmel</span></p>
+      <div class="hair">
+        <div class="copy">
+          <p class="label" data-t="h.label">Włosy</p>
+          <h2 class="h2" data-t="h.h2">Premium i dziewicze. Żadnej bioproteiny.</h2>
+          <p data-t="h.p1"><strong>Włosy dziewicze</strong> nigdy nie były farbowane ani poddane chemicznej obróbce. Łuska jest ułożona w jednym kierunku, więc włosy się nie plączą i długo zachowują połysk.</p>
+          <p data-t="h.p2"><strong>Bioproteina</strong> to włókno sztuczne, które tylko udaje włosy. Matowieje, plącze się, nie znosi wysokiej temperatury i nie da się go przefarbować. Dlatego z nim nie pracuję.</p>
+          <p data-t="h.p3">Dobre włosy można po zdjęciu założyć ponownie przy korekcie. Płacisz za nie raz i nosisz długo.</p>
+        </div>
+        <div class="compare" role="region" aria-label="Porównanie rodzajów włosów" data-ta="aria-label:cmp.aria" tabindex="0">
+          <div class="compare-in">
+            <div class="row"><span class="h"></span><span class="h us" data-t="cmp.h1">Dziewicze / premium</span><span class="h" data-t="cmp.h2">Bioproteina</span></div>
+            <div class="row"><span data-t="cmp.r1">Farbowanie</span><span class="us" data-t="yes">Tak</span><span class="no" data-t="no">Nie</span></div>
+            <div class="row"><span data-t="cmp.r2">Lokówka, prostownica</span><span class="us" data-t="yes">Tak</span><span class="no" data-t="cmp.lim">Ograniczone</span></div>
+            <div class="row"><span data-t="cmp.r3">Wygląd w świetle</span><span class="us" data-t="cmp.shine">Naturalny połysk</span><span class="no" data-t="cmp.gloss">Sztuczny błysk</span></div>
+            <div class="row"><span data-t="cmp.r4">Plątanie</span><span class="us" data-t="cmp.min">Minimalne</span><span class="no" data-t="cmp.mats">Szybko się filcuje</span></div>
+            <div class="row"><span data-t="cmp.r5">Ponowne założenie</span><span class="us" data-t="cmp.reuse">Tak, przy korekcie</span><span class="no" data-t="cmp.usually">Zwykle nie</span></div>
+          </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <hr class="rule">
-
-  <section class="block" id="wizyta">
-    <div class="wrap">
+    <div class="wrap sec" id="wizyta">
       <div class="head">
         <div>
           <p class="label" data-t="v.label">Wizyta</p>
-          <h2 style="margin-top:10px" data-t="v.h2">Jak to wygląda krok po kroku</h2>
+          <h2 data-t="v.h2">Jak to wygląda krok po kroku</h2>
         </div>
         <p data-t="v.p">Od pierwszej wiadomości do pierwszej korekty. Na każdym etapie wiesz, co się dzieje i ile to potrwa.</p>
       </div>
@@ -501,34 +500,13 @@ footer .logo{color:var(--ink)}
     </div>
   </section>
 
-  <section class="block" style="padding-top:0">
-    <div class="wrap">
-      <div class="head">
-        <div>
-          <p class="label" data-t="k.label">Kolor</p>
-          <h2 style="margin-top:10px" data-t="k.h2">Od platyny po czerń</h2>
-        </div>
-        <p data-t="k.p">To tylko punkt wyjścia. Ostateczny kolor składam z kilku tonów, dopasowując go do Twoich włosów pasmo przy paśmie.</p>
-      </div>
-      <div class="shades">
-        <div class="shade"><div class="lock" style="background:linear-gradient(180deg,#d8cdbb,#f1ebdf 55%,#e7dccb)"></div><span data-t="sh1">Platyna</span><small>10 / 01</small></div>
-        <div class="shade"><div class="lock" style="background:linear-gradient(180deg,#a99577,#d7c4a1 55%,#e8d7b6)"></div><span data-t="sh2">Beżowy blond</span><small>9 / 3</small></div>
-        <div class="shade"><div class="lock" style="background:linear-gradient(180deg,#8d775a,#bfa27b 55%,#cdb28b)"></div><span data-t="sh3">Ciemny blond</span><small>7 / 0</small></div>
-        <div class="shade"><div class="lock" style="background:linear-gradient(180deg,#6b4a30,#a0703f 55%,#b8834c)"></div><span data-t="sh4">Karmel</span><small>6 / 34</small></div>
-        <div class="shade"><div class="lock" style="background:linear-gradient(180deg,#3a2a21,#5b4031 55%,#6b4b38)"></div><span data-t="sh5">Czekolada</span><small>4 / 0</small></div>
-        <div class="shade"><div class="lock" style="background:linear-gradient(180deg,#141011,#252021 55%,#2e292a)"></div><span data-t="sh6">Naturalna czerń</span><small>1 / 0</small></div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="rule">
-
-  <section class="block" id="skup">
-    <div class="wrap">
+  <section class="ch c5" id="ch5" data-shade="5">
+    <div class="wrap sec" id="skup">
+      <p class="swatch"><i></i>4 / 0 · <span data-t="sh5">Czekolada</span></p>
       <div class="head">
         <div>
           <p class="label" data-t="b.label">Skup włosów</p>
-          <h2 style="margin-top:10px" data-t="b.h2">Kupię naturalne włosy od 45 cm</h2>
+          <h2 data-t="b.h2">Kupię naturalne włosy od 45 cm</h2>
         </div>
         <p data-t="b.p">Marzysz o stylowym bobie albo zmianie wizerunku? Zetnij włosy w moim studio, a dostaniesz za nie pieniądze i dopracowaną fryzurę za darmo.</p>
       </div>
@@ -536,8 +514,8 @@ footer .logo{color:var(--ink)}
         <div class="price">
           <p class="label" data-t="dt.price">Cena</p>
           <p class="big" data-t="b.big">od 5 zł <small>/ gram</small></p>
-          <p class="muted" data-t="b.m1">Ostateczna kwota zależy od wagi, długości i kondycji kity. Wypłata od razu po ścięciu i zważeniu: BLIK, gotówka lub przelew.</p>
-          <p class="muted" data-t="b.m2">Najwyżej wyceniam włosy dziecięce i naturalne jasne odcienie.</p>
+          <p class="mu" data-t="b.m1">Ostateczna kwota zależy od wagi, długości i kondycji kity. Wypłata od razu po ścięciu i zważeniu: BLIK, gotówka lub przelew.</p>
+          <p class="mu" data-t="b.m2">Najwyżej wyceniam włosy dziecięce i naturalne jasne odcienie.</p>
         </div>
         <div>
           <p class="label" data-t="b.acc">Przyjmuję</p>
@@ -566,16 +544,12 @@ footer .logo{color:var(--ink)}
         <p class="status" id="status-skup"></p>
       </div>
     </div>
-  </section>
 
-  <hr class="rule">
-
-  <section class="block" id="faq">
-    <div class="wrap faq">
+    <div class="wrap sec faq" id="faq">
       <div>
         <p class="label" data-t="f.label">Pytania</p>
-        <h2 style="font-size:var(--s3);margin-top:10px" data-t="f.h2">Zanim napiszesz</h2>
-        <p style="color:var(--muted);margin-top:16px;max-width:30ch" data-t="f.p">Nie ma tu Twojego pytania? Napisz na Instagramie, odpowiem osobiście.</p>
+        <h2 class="h2" style="margin-top:10px" data-t="f.h2">Zanim napiszesz</h2>
+        <p style="color:var(--mut);margin-top:16px;max-width:30ch" data-t="f.p">Nie ma tu Twojego pytania? Napisz na Instagramie, odpowiem osobiście.</p>
       </div>
       <div>
         <details open><summary data-t="q1">Czy łączenia będą widoczne?</summary><p data-t="a1">Nie powinny. Dobieram wielkość łączeń do grubości Twoich pasm i rozmieszczam je tak, żeby schowały się pod naturalnymi włosami również przy upięciach.</p></details>
@@ -588,21 +562,55 @@ footer .logo{color:var(--ink)}
     </div>
   </section>
 
-  <section class="block contact" id="kontakt">
-    <div class="wrap">
+  <section class="ch c6" id="ch6" data-shade="6">
+    <div class="wrap sec" id="kontakt">
+      <p class="swatch"><i></i>1 / 0 · <span data-t="sh6">Naturalna czerń</span></p>
       <div class="head">
         <div>
           <p class="label" data-t="c.label">Kontakt</p>
-          <h2 style="margin-top:10px" data-t="c.h2">Napisz, jaki efekt chcesz osiągnąć</h2>
+          <h2 data-t="c.h2">Napisz, jaki efekt chcesz osiągnąć</h2>
         </div>
         <p data-t="c.p">Zaznacz kilka rzeczy, a wiadomość ułoży się sama. Skopiuj ją i wyślij w wiadomości prywatnej na Instagramie. Dołącz zdjęcie swoich włosów w świetle dziennym.</p>
       </div>
-      <div class="builder">
+      <div class="cfg">
+        <div class="figp">
+          <svg id="fig" viewBox="0 0 380 480" role="img" aria-label="Podgląd długości włosów" data-ta="aria-label:cfg.fig">
+            <defs><linearGradient id="hg" x1="0" y1="0" x2="0" y2="1"><stop id="hg0" offset="0" stop-color="#7f6a4e"/><stop id="hg1" offset="1" stop-color="#c4a77f"/></linearGradient></defs>
+            <g id="ruler"></g>
+            <g transform="translate(40 0)">
+              <path class="mannequin" d="M118 108 V130 C100 142 74 148 60 166 L68 252 C72 300 80 320 84 332 C78 362 70 392 68 422 V480 H192 V422 C190 392 182 362 176 332 C180 320 188 300 192 252 L200 166 C186 148 160 142 142 130 V108 Z"/>
+              <ellipse class="mannequin" cx="130" cy="72" rx="33" ry="42"/>
+              <path id="hair" fill="url(#hg)" d="M92 78 C88 8 172 8 168 78 C174 112 180 150 180 318 Q130 344 80 318 C80 150 86 112 92 78 Z"/>
+              <g id="hairlines" fill="none"></g>
+            </g>
+            <line id="mark" x1="56" x2="118" y1="330" y2="330"/>
+            <g>
+              <line class="lmline" x1="246" x2="262" y1="170" y2="170"/><text x="268" y="174" data-t="lm.sh">ramiona</text>
+              <line class="lmline" x1="246" x2="262" y1="245" y2="245"/><text x="268" y="249" data-t="lm.bl">łopatki</text>
+              <line class="lmline" x1="246" x2="262" y1="330" y2="330"/><text x="268" y="334" data-t="lm.wa">talia</text>
+              <line class="lmline" x1="246" x2="262" y1="410" y2="410"/><text x="268" y="414" data-t="lm.hip">biodra</text>
+            </g>
+          </svg>
+          <p class="fnote" data-t="cfg.note">Orientacyjnie, przy wzroście ok. 165 cm. Długość liczona od czubka głowy.</p>
+        </div>
+
         <form id="f" novalidate>
           <div class="field full">
-            <label for="name" data-t="fm.name">Imię</label>
-            <input type="text" id="name" placeholder="np. Karolina" data-ta="placeholder:fm.namePh" autocomplete="given-name">
+            <label for="len"><span data-t="fm.len">Chcę długość</span>: <output id="len-n" for="len">60</output> <span id="len-u">cm</span></label>
+            <input type="range" id="len" min="40" max="70" step="5" value="60">
           </div>
+          <fieldset class="field full">
+            <legend data-t="cfg.shade">Odcień</legend>
+            <div class="shades">
+              <label><input type="radio" name="shade" id="sd1" value="1"><i style="--g:linear-gradient(180deg,#cfc3ad,#f4eee0)"></i></label>
+              <label><input type="radio" name="shade" id="sd2" value="2"><i style="--g:linear-gradient(180deg,#a08a6a,#e2cfa9)"></i></label>
+              <label><input type="radio" name="shade" id="sd3" value="3" checked><i style="--g:linear-gradient(180deg,#7f6a4e,#c4a77f)"></i></label>
+              <label><input type="radio" name="shade" id="sd4" value="4"><i style="--g:linear-gradient(180deg,#5f4029,#b07c45)"></i></label>
+              <label><input type="radio" name="shade" id="sd5" value="5"><i style="--g:linear-gradient(180deg,#33241c,#654735)"></i></label>
+              <label><input type="radio" name="shade" id="sd6" value="6"><i style="--g:linear-gradient(180deg,#121010,#2e292a)"></i></label>
+            </div>
+            <p class="hint" style="margin-top:8px"><b id="shade-name" style="color:var(--ink);font-weight:600">Ciemny blond</b>. <span data-t="k.p">To tylko punkt wyjścia. Ostateczny kolor składam z kilku tonów, dopasowując go do Twoich włosów pasmo przy paśmie.</span></p>
+          </fieldset>
           <fieldset class="field full">
             <legend data-t="fm.method">Metoda</legend>
             <div class="chips">
@@ -620,6 +628,10 @@ footer .logo{color:var(--ink)}
             </div>
           </fieldset>
           <div class="field">
+            <label for="name" data-t="fm.name">Imię</label>
+            <input type="text" id="name" placeholder="np. Karolina" data-ta="placeholder:fm.namePh" autocomplete="given-name">
+          </div>
+          <div class="field">
             <label for="now" data-t="fm.now">Moje włosy teraz</label>
             <select id="now">
               <option value="chin" data-t="o.chin">do brody</option>
@@ -628,20 +640,12 @@ footer .logo{color:var(--ink)}
               <option value="mid" data-t="o.mid">do połowy pleców</option>
             </select>
           </div>
-          <div class="field">
-            <label for="len" data-t="fm.len">Chcę długość</label>
-            <select id="len">
-              <option value="40">40 cm</option>
-              <option value="50">50 cm</option>
-              <option value="60" selected>60 cm</option>
-              <option value="70">70 cm</option>
-            </select>
-          </div>
           <div class="field full">
             <label for="notes" data-t="fm.notes">Coś jeszcze?</label>
             <textarea id="notes" placeholder="np. mam rozjaśniane końce, wolne terminy w soboty" data-ta="placeholder:fm.notesPh"></textarea>
           </div>
         </form>
+
         <div class="preview">
           <p class="label" data-t="c.your">Twoja wiadomość</p>
           <div class="bubble" id="msg" aria-live="polite"></div>
@@ -650,23 +654,19 @@ footer .logo{color:var(--ink)}
             <a class="btn btn-ghost" href="https://ig.me/m/dariaextensions" target="_blank" rel="noopener" data-t="ig.open">Otwórz Instagram ↗</a>
           </div>
           <p class="status" id="status"></p>
-          <p class="note" style="margin-top:0">Instagram: <span style="user-select:all;color:var(--ink)">@dariaextensions</span></p>
+          <p class="hint">Instagram: <span style="user-select:all;color:var(--ink)">@dariaextensions</span></p>
         </div>
       </div>
+
+      <footer>
+        <a class="logo" href="#ch1">Daria <i style="color:var(--acc)">Extensions</i></a>
+        <span data-t="foot">Poznań · Przedłużanie i zagęszczanie włosów · Skup włosów</span>
+        <a href="https://www.instagram.com/dariaextensions/" target="_blank" rel="noopener">@dariaextensions ↗</a>
+      </footer>
     </div>
   </section>
 </main>
-
-<footer>
-  <div class="wrap">
-    <a class="logo" href="#start">Daria <i>Extensions</i></a>
-    <span data-t="foot">Poznań · Przedłużanie i zagęszczanie włosów · Skup włosów</span>
-    <a href="https://www.instagram.com/dariaextensions/" target="_blank" rel="noopener">@dariaextensions ↗</a>
-  </div>
-</footer>
-
 <script>
-/* ---------- translations (Polish is read from the page itself) ---------- */
 const I18N = {
 uk: {
  "lang.aria":"Мова","nav.pf":"Портфоліо","nav.me":"Методи","nav.hair":"Волосся","nav.visit":"Візит","nav.buy":"Скупка волосся","nav.faq":"Питання",
@@ -850,17 +850,32 @@ const MSG = {
      hints:["subtle volume","noticeable volume","lengthening and full density"],locale:"en-GB",from:"from"}
 };
 
+
+/* ---------- v2 additions to the dictionaries ---------- */
+Object.assign(I18N.uk, {
+ "cfg.shade":"Відтінок","cfg.fig":"Попередній перегляд довжини волосся","idx.aria":"Розділи сторінки",
+ "lm.sh":"плечі","lm.bl":"лопатки","lm.wa":"талія","lm.hip":"стегна",
+ "cfg.note":"Орієнтовно, для зросту близько 165 см. Довжину рахуємо від маківки."
+});
+Object.assign(I18N.en, {
+ "cfg.shade":"Shade","cfg.fig":"Hair length preview","idx.aria":"Page sections",
+ "lm.sh":"shoulders","lm.bl":"shoulder blades","lm.wa":"waist","lm.hip":"hips",
+ "cfg.note":"Approximate, for a height of about 165 cm. Length is measured from the crown."
+});
+MSG.pl.shade = "Odcień"; MSG.uk.shade = "Відтінок"; MSG.en.shade = "Shade";
+
+const REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 const LANG = (function(){
-  const PL = {}, PLA = [];
+  const PL = {};
   document.querySelectorAll('[data-t]').forEach(el=>{ const k = el.dataset.t; if(!(k in PL)) PL[k] = el.innerHTML; });
   document.querySelectorAll('[data-ta]').forEach(el=>{
     el.dataset.ta.split(';').forEach(pair=>{ const [attr,key] = pair.split(':'); if(!(key in PL)) PL[key] = el.getAttribute(attr) || ''; });
   });
   I18N.pl = PL;
   const subs = [];
-  const state = {cur:'pl', on(fn){ subs.push(fn); }, set};
-  function set(lang){
-    if(!I18N[lang]) lang = 'pl';
+  const state = {cur:'pl', on(fn){ subs.push(fn); }, set, t(k){ const d = I18N[state.cur]; return (d && d[k] != null) ? d[k] : PL[k]; }};
+  function apply(lang){
     state.cur = lang;
     const d = I18N[lang];
     document.querySelectorAll('[data-t]').forEach(el=>{ const v = d[el.dataset.t]; el.innerHTML = v != null ? v : PL[el.dataset.t]; });
@@ -872,98 +887,101 @@ const LANG = (function(){
     try{ localStorage.setItem('de-lang', lang); }catch(e){}
     subs.forEach(fn=>fn(lang));
   }
-  document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click', ()=>set(b.dataset.lang)));
+  function set(lang, soft){
+    if(!I18N[lang]) lang = 'pl';
+    if(soft && document.startViewTransition && !REDUCE){ document.startViewTransition(()=>apply(lang)); }
+    else apply(lang);
+  }
+  document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click', ()=>set(b.dataset.lang, true)));
   return state;
 })();
 
-/* hair strands in the arched mirror */
+/* hair curtain hanging from the top edge of the hero */
 (function(){
   const c = document.getElementById('strands');
   const ctx = c.getContext('2d');
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let W=0,H=0,strands=[],colors={};
-  function readColors(){
-    const s = getComputedStyle(document.documentElement);
-    colors = {a:s.getPropertyValue('--gold').trim(), b:s.getPropertyValue('--gold-2').trim(), c:s.getPropertyValue('--gold-3').trim()};
-  }
-  function rnd(seed){ let x = Math.sin(seed*999.13)*43758.5453; return x - Math.floor(x); }
+  const TONES = ['#8A5C33','#B58A55','#C9A56E','#D9BC8A','#6B4526','#E2CDA3'];
+  let W=0,H=0,strands=[];
+  function rnd(seed){ const x = Math.sin(seed*999.13)*43758.5453; return x - Math.floor(x); }
   function build(){
     const r = c.getBoundingClientRect();
     const dpr = Math.min(window.devicePixelRatio||1, 2);
     W = r.width; H = r.height;
     c.width = Math.round(W*dpr); c.height = Math.round(H*dpr);
     ctx.setTransform(dpr,0,0,dpr,0,0);
-    const n = Math.round(W/3.2);
+    const n = Math.round(W/2.6);
     strands = [];
     for(let i=0;i<n;i++){
       const t = i/n;
       strands.push({
-        x: W*0.06 + t*W*0.88 + (rnd(i)-.5)*10,
-        top: H*0.08 + Math.pow(Math.abs(t-.5)*2,2)*H*0.2 + rnd(i+3)*12,
-        len: H*(0.72 + rnd(i+7)*0.22),
-        sway: 8 + rnd(i+11)*22,
+        x: W*0.04 + t*W*0.92 + (rnd(i)-.5)*8,
+        len: H*(0.56 + 0.32*Math.sin(Math.PI*t) + rnd(i+7)*0.05),
+        sway: 6 + rnd(i+11)*20,
         phase: rnd(i+13)*Math.PI*2,
-        w: .5 + rnd(i+17)*1.1,
-        tone: rnd(i+19)
+        w: .5 + rnd(i+17)*1.2,
+        tone: TONES[Math.floor(rnd(i+19)*TONES.length)],
+        a: .5 + rnd(i+23)*.45,
+        off:0, vel:0
       });
     }
   }
   const P = {x:-999,y:-999,on:false,vx:0};
-  const mirror = document.getElementById('mirror');
-  mirror.addEventListener('pointermove', e=>{
+  const host = document.getElementById('mirror');
+  host.addEventListener('pointermove', e=>{
     const r = c.getBoundingClientRect();
     const nx = e.clientX - r.left;
     P.vx = P.on ? nx - P.x : 0;
     P.x = nx; P.y = e.clientY - r.top; P.on = true;
   });
-  mirror.addEventListener('pointerleave', ()=>{ P.on=false; });
-  mirror.addEventListener('pointercancel', ()=>{ P.on=false; });
+  host.addEventListener('pointerleave', ()=>{ P.on=false; });
+  host.addEventListener('pointercancel', ()=>{ P.on=false; });
   function physics(){
-    const R = Math.max(46, W*0.13);
+    const R = Math.max(50, W*0.14);
     for(const s of strands){
       let target = 0;
-      if(P.on && P.y > s.top){
-        const dx = s.x - P.x;
-        const ad = Math.abs(dx);
+      if(P.on){
+        const dx = s.x - P.x, ad = Math.abs(dx);
         if(ad < R){
-          const depth = Math.min(1,(P.y - s.top)/(s.len*0.6));
-          target = Math.sign(dx||1) * (R - ad) * 1.1 * depth + P.vx*0.6*(1-ad/R);
+          const depth = Math.min(1, Math.max(0, P.y/(s.len*0.6)));
+          target = Math.sign(dx||1)*(R-ad)*1.1*depth + P.vx*0.6*(1-ad/R);
         }
       }
-      s.vel = (s.vel||0) + (target - (s.off||0))*0.09;
+      s.vel += (target - s.off)*0.09;
       s.vel *= 0.8;
-      s.off = (s.off||0) + s.vel;
+      s.off += s.vel;
     }
     P.vx *= 0.7;
   }
   function draw(time){
     ctx.clearRect(0,0,W,H);
     const tt = time/1000;
-    if(!reduce) physics();
+    if(!REDUCE) physics();
     for(const s of strands){
-      const sw = Math.sin(tt*0.6 + s.phase)*s.sway + (s.off||0);
-      const g = ctx.createLinearGradient(0,s.top,0,s.top+s.len);
-      const mid = s.tone < .33 ? colors.c : s.tone < .7 ? colors.a : colors.b;
-      g.addColorStop(0, colors.c);
-      g.addColorStop(.35, mid);
-      g.addColorStop(1, colors.b);
-      ctx.strokeStyle = g;
-      ctx.globalAlpha = .55 + s.tone*.4;
+      const sw = Math.sin(tt*0.6 + s.phase)*s.sway + s.off;
+      ctx.strokeStyle = s.tone;
+      ctx.globalAlpha = s.a;
       ctx.lineWidth = s.w;
       ctx.beginPath();
-      ctx.moveTo(s.x, s.top);
-      ctx.bezierCurveTo(s.x + sw*.2, s.top + s.len*.35, s.x - sw*.6, s.top + s.len*.7, s.x + sw, s.top + s.len);
+      ctx.moveTo(s.x, -6);
+      ctx.bezierCurveTo(s.x + sw*.15, s.len*.35, s.x - sw*.6, s.len*.7, s.x + sw, s.len);
       ctx.stroke();
     }
     ctx.globalAlpha = 1;
   }
-  function loop(t){ draw(t); if(!reduce) requestAnimationFrame(loop); }
-  readColors(); build(); requestAnimationFrame(loop);
-  window.addEventListener('resize', ()=>{ build(); if(reduce) draw(0); });
-  const mq = window.matchMedia('(prefers-color-scheme: dark)');
-  const recolor = ()=>{ readColors(); if(reduce) draw(0); };
-  mq.addEventListener && mq.addEventListener('change', recolor);
-  new MutationObserver(recolor).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+  function loop(t){ draw(t); if(!REDUCE) requestAnimationFrame(loop); }
+  build(); requestAnimationFrame(loop);
+  let rw = 0;
+  window.addEventListener('resize', ()=>{ if(window.innerWidth === rw) return; rw = window.innerWidth; build(); if(REDUCE) draw(0); });
+})();
+
+/* chapter tracking: swatch strip + mobile dock */
+(function(){
+  const links = [...document.querySelectorAll('.idx a')];
+  function mark(n){ document.body.dataset.shade = n; links.forEach(a=>a.classList.toggle('on', a.dataset.shade === n)); }
+  mark('1');
+  if(!('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver(es=>{ es.forEach(e=>{ if(e.isIntersecting) mark(e.target.dataset.shade); }); }, {rootMargin:'-50% 0px -50% 0px'});
+  document.querySelectorAll('.ch').forEach(ch=>io.observe(ch));
 })();
 
 /* portfolio lightbox */
@@ -997,7 +1015,7 @@ const LANG = (function(){
   LANG.on(()=>{ if(lb.open) show(cur); });
 })();
 
-/* capsule price calculator */
+/* capsule price estimate */
 (function(){
   const r = document.getElementById('caps');
   const nEl = document.getElementById('caps-n'), pEl = document.getElementById('caps-p'), hEl = document.getElementById('caps-h');
@@ -1010,12 +1028,56 @@ const LANG = (function(){
   r.addEventListener('input', upd); LANG.on(upd); upd();
 })();
 
+/* length + shade preview on the figure */
+const FIG = (function(){
+  const SH = [['#cfc3ad','#f4eee0'],['#a08a6a','#e2cfa9'],['#7f6a4e','#c4a77f'],['#5f4029','#b07c45'],['#33241c','#654735'],['#121010','#2e292a']];
+  const NS = 'http://www.w3.org/2000/svg';
+  const hair = document.getElementById('hair'), lines = document.getElementById('hairlines'), mark = document.getElementById('mark');
+  const ruler = document.getElementById('ruler'), g0 = document.getElementById('hg0'), g1 = document.getElementById('hg1');
+  const Y = cm => 30 + cm*5;
+  const ticks = {};
+  for(let cm=0; cm<=80; cm+=10){
+    const l = document.createElementNS(NS,'line');
+    l.setAttribute('class','tick'); l.setAttribute('x1', cm%20===0?40:46); l.setAttribute('x2',54); l.setAttribute('y1',Y(cm)); l.setAttribute('y2',Y(cm));
+    ruler.appendChild(l);
+    if(cm >= 40 && cm <= 70){
+      const t = document.createElementNS(NS,'text');
+      t.setAttribute('x',34); t.setAttribute('y',Y(cm)+4); t.setAttribute('text-anchor','end'); t.textContent = cm;
+      ruler.appendChild(t); ticks[cm] = t;
+    }
+  }
+  const ln = [];
+  for(let i=0;i<7;i++){ const p = document.createElementNS(NS,'path'); p.setAttribute('stroke', i%2 ? 'rgba(255,255,255,.2)' : 'rgba(0,0,0,.16)'); p.setAttribute('stroke-width','1'); lines.appendChild(p); ln.push(p); }
+  let y = Y(60), target = y, raf = 0;
+  function render(){
+    hair.setAttribute('d', `M92 78 C88 8 172 8 168 78 C174 112 180 150 180 ${y-12} Q130 ${y+14} 80 ${y-12} C80 150 86 112 92 78 Z`);
+    ln.forEach((p,i)=>{ const f = i/6, x0 = 100 + f*60, x1 = 90 + f*80; p.setAttribute('d', `M${x0} 44 C${x0} 140 ${x1} 200 ${x1} ${y-14+Math.sin(f*Math.PI)*10}`); });
+    mark.setAttribute('y1', y); mark.setAttribute('y2', y);
+  }
+  function step(){
+    y += (target - y)*0.18;
+    if(Math.abs(target - y) < .4){ y = target; raf = 0; render(); return; }
+    render(); raf = requestAnimationFrame(step);
+  }
+  function setLen(cm){
+    target = Y(cm);
+    Object.keys(ticks).forEach(k=>ticks[k].setAttribute('class', +k === Math.round(cm/10)*10 && cm%10===0 ? 'on' : ''));
+    if(REDUCE){ y = target; render(); } else if(!raf){ raf = requestAnimationFrame(step); }
+  }
+  function setShade(i){ const s = SH[i-1] || SH[2]; g0.setAttribute('stop-color', s[0]); g1.setAttribute('stop-color', s[1]); }
+  render();
+  return {setLen, setShade};
+})();
+
 /* message builder */
 (function(){
   const f = document.getElementById('f');
   const out = document.getElementById('msg');
   const status = document.getElementById('status');
-  const lenSel = document.getElementById('len');
+  const st2 = document.getElementById('status-skup');
+  const len = document.getElementById('len'), lenN = document.getElementById('len-n'), lenU = document.getElementById('len-u');
+  const shadeName = document.getElementById('shade-name');
+  function shade(){ return (f.querySelector('input[name=shade]:checked')||{}).value || '3'; }
   function compose(){
     const m = MSG[LANG.cur];
     const name = document.getElementById('name').value.trim();
@@ -1024,22 +1086,25 @@ const LANG = (function(){
     const nowSel = document.getElementById('now');
     const now = nowSel.options[nowSel.selectedIndex].textContent;
     const notes = document.getElementById('notes').value.trim();
+    const sName = LANG.t('sh' + shade());
+    lenN.textContent = len.value; lenU.textContent = m.unit; shadeName.textContent = sName;
+    FIG.setLen(+len.value); FIG.setShade(+shade());
     let t = m.hi + (name ? m.intro + name : '') + '!\n';
     t += m.ask + '\n\n';
     t += '• ' + m.method + ': ' + m.methods[method] + '\n';
     t += '• ' + m.goal + ': ' + (goals.length ? goals.join(', ') : m.none) + '\n';
     t += '• ' + m.now + ': ' + now + '\n';
-    t += '• ' + m.len + ': ' + lenSel.value + ' ' + m.unit + '\n';
+    t += '• ' + m.len + ': ' + len.value + ' ' + m.unit + '\n';
+    t += '• ' + m.shade + ': ' + sName.toLowerCase() + '\n';
     if(notes) t += '• ' + m.notes + ': ' + notes + '\n';
     t += '\n' + m.end;
     out.textContent = t;
     return t;
   }
-  function units(){ const u = MSG[LANG.cur].unit; [...lenSel.options].forEach(o=>{ o.textContent = o.value + ' ' + u; }); }
   f.addEventListener('input', compose);
   f.addEventListener('change', compose);
   f.addEventListener('submit', e=>e.preventDefault());
-  LANG.on(()=>{ units(); compose(); status.textContent=''; st2.textContent=''; });
+  LANG.on(()=>{ compose(); status.textContent=''; st2.textContent=''; });
   document.getElementById('copy').addEventListener('click', ()=>{
     const t = compose();
     const fallback = ()=>{
@@ -1047,17 +1112,14 @@ const LANG = (function(){
       const s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
       status.textContent = MSG[LANG.cur].sel;
     };
-    try{
-      navigator.clipboard.writeText(t).then(()=>{ status.textContent = MSG[LANG.cur].copied; }, fallback);
-    }catch(e){ fallback(); }
+    try{ navigator.clipboard.writeText(t).then(()=>{ status.textContent = MSG[LANG.cur].copied; }, fallback); }catch(e){ fallback(); }
   });
-  const st2 = document.getElementById('status-skup');
   document.getElementById('copy-skup').addEventListener('click', ()=>{
     const m = MSG[LANG.cur];
     const fb = ()=>{ st2.textContent = m.skupFail; };
     try{ navigator.clipboard.writeText(m.skup).then(()=>{ st2.textContent = m.skupOk; }, fb); }catch(e){ fb(); }
   });
-  units(); compose();
+  compose();
 })();
 
 /* pick the starting language: saved choice, then the browser's language, then Polish */
